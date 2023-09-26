@@ -237,7 +237,7 @@ const PropsTable = ({apiGet , apiPost , title , apiPostDoc}) => {
                   
                 </Box>
                 
-                  <Box pl={"15px"} display={"flex"} alignItems={"center"} gap={"15px"}>
+                  <Box display={"flex"} alignItems={"center"} gap={"15px"}>
                       <form action="" >
                         <input  className='input-field' hidden type="file" accept=".xlsx,.xls"  onChange={handleFile} />
                       </form>
@@ -249,6 +249,7 @@ const PropsTable = ({apiGet , apiPost , title , apiPostDoc}) => {
                           _active={"none"}
                           bg={"#404E67"}
                           borderRadius={"3px"}
+                          w={'120px'}
                         >
                           Exel
                         </Button>
