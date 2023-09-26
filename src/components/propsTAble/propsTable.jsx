@@ -64,52 +64,65 @@ const PropsTable = ({apiGet , apiPost , title , apiPostDoc}) => {
           });
       }, []);
 
-      const handleSubmit = () => {
-        axios
-        .post(`${API}${apiPost}`,  {
-          "name": valueData
-        }, {
-          headers: {
-            // "ngrok-skip-browser-warning": true,
-            // "Access-Control-Allow-Origin": "*",
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-          },
-        })
-        .then((res) => {
-          setVAlueData('')
-          
-          if(res.status === 200) {
-            toast({
-              description: `${res.data.message}`,
-              status: 'success',
-              position: 'top-right',
-              duration: 2000,
-              isClosable: true,
-            })
-              axios
-              .get(`${API}${apiGet}`, {
-                headers: {
-                  // "ngrok-skip-browser-warning": true,
-                  // "Access-Control-Allow-Origin": "*",
-                  Authorization: `Bearer ${localStorage.getItem("token")}`,
-                },
-              })
-              .then((res) => {
-                setData(res.data);
-              });
-    
-          }
-    
-        }).catch((err) => {
-          toast({
-            description: `${err.response.data.message}`,
-            status: 'error',
-            position: 'top-right',
-            duration: 2000,
-            isClosable: true,
+        const handleSubmit = () => {
+               
+                axios
+                .post(`${API}${apiPost}`,  {
+                  "name": valueData
+                }, {
+                  headers: {
+                    // "ngrok-skip-browser-warning": true,
+                    // "Access-Control-Allow-Origin": "*",
+                    Authorization: `Bearer ${localStorage.getItem("token")}`,
+                  },
+                })
+                .then((res) => {
+                  setVAlueData('')
+                  
+                  if(res.status === 200) {
+                    toast({
+                      description: `${res.data.message}`,
+                      status: 'success',
+                      position: 'top-right',
+                      duration: 2000,
+                      isClosable: true,
+                    })
+                      axios
+                      .get(`${API}${apiGet}`, {
+                        headers: {
+                          // "ngrok-skip-browser-warning": true,
+                          // "Access-Control-Allow-Origin": "*",
+                          Authorization: `Bearer ${localStorage.getItem("token")}`,
+                        },
+                      })
+                      .then((res) => {
+                        setData(res.data);
+                      });
+            
+                  }
+            
+                }).catch((err) => {
+                  toast({
+                    description: `${err.response.data.message}`,
+                    status: 'error',
+                    position: 'top-right',
+                    duration: 2000,
+                    isClosable: true,
+                  })
+                });
+              
+        }
+
+        
+          window.addEventListener('keydown' , (e) => {
+            if(e.key == "Enter") {
+              handleSubmit()
+            }
           })
-        });
-      }
+
+        
+        
+      
     
       const handleSubmitDoc = () => {
         const formData=  new FormData()
@@ -214,8 +227,7 @@ const PropsTable = ({apiGet , apiPost , title , apiPostDoc}) => {
 
                   
                   <Button
-                    onClick={function() {
-                      
+                    onClick={function(e) {
                       if(!valueData == '') {
                         handleSubmit()
                         if(!valueData === '') {
@@ -225,6 +237,8 @@ const PropsTable = ({apiGet , apiPost , title , apiPostDoc}) => {
                         setValiDate(true)
                       }
                     }}
+                    
+                  
                     bg={"#4CAF50"}
                     color={"#fff"}
                     borderRadius={"3px"}
