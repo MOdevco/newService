@@ -13,7 +13,7 @@ import {
   Button,
   Input,
 } from "@chakra-ui/react";
-import { MdOutlineMoreVert } from 'react-icons/md'
+import { MdDelete, MdOutlineMoreVert } from 'react-icons/md'
 import axios from "axios";
 import { API } from "../../api";
 import { useToast } from '@chakra-ui/react'
@@ -48,6 +48,8 @@ const PropsTable = ({ apiGet, apiPost, title, apiPostDoc }) => {
   const [loading, setLoading] = useState(true)
   const [saveData, setSaveData] = useState(false)
   const [search, setSearch] = useState('')
+
+ 
 
   const handleFile = (e) => {
     setFiles({ ...files, file: e.target.files[0] })
@@ -112,6 +114,8 @@ const PropsTable = ({ apiGet, apiPost, title, apiPostDoc }) => {
         })
       });
   }
+
+
 
   const handleSubmitDoc = () => {
     const formData = new FormData()
@@ -198,7 +202,11 @@ const PropsTable = ({ apiGet, apiPost, title, apiPostDoc }) => {
           <Box>
             <Box pb={"25px"} display={"flex"} alignItems={"center"}>
               <Box display={'flex'} border={'1px'} rounded={'3px'} alignItems={'center'} borderColor={'#B5BDC5'} >
-                <input className={validateDate ? "success" : 'sucPre'}
+                <form action="" onSubmit={(e) => {
+                  e.preventDefault()
+                  handleSubmit()
+                }}>
+                <input id="input" className={validateDate ? "success" : 'sucPre'}
                   onChange={function (e) {
                     if (e.target.value.match("[0-9*]")) {
                       e.target.value = ""
@@ -236,7 +244,7 @@ const PropsTable = ({ apiGet, apiPost, title, apiPostDoc }) => {
                 >
                   Qo’shish
                 </Button>
-
+                </form>
               </Box>
 
               <Box pl={"15px"} display={"flex"} alignItems={"center"} gap={"15px"}>
@@ -361,7 +369,7 @@ const PropsTable = ({ apiGet, apiPost, title, apiPostDoc }) => {
                         <MdOutlineMoreVert size={"29px"} />
                         </MenuButton>
                         <MenuList>
-                          <MenuItem display={'flex'} alignItems={'center'} gap={'10px'}> <FcEditImage fontSize={'20px'}/> Download</MenuItem>
+                          <MenuItem onClick={ () => filtered()} display={'flex'} alignItems={'center'} gap={'10px'} fontSize={'15px'}> <MdDelete fontSize={'23px'} /> Delete</MenuItem>
                           <MenuItem display={'flex'} alignItems={'center'} gap={'10px'}>  <LuCopyPlus fontSize={'20px'} /> Create a Copy</MenuItem>
                         </MenuList>
                       </>
