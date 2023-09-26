@@ -39,4 +39,15 @@ p {
     background-color: transparent;
     outline: none;
     padding-left: 10px;
+    width: 100%;
+}
+
+.inp {
+    position: sticky;
+    top: 95px;
+}
+
+.inp2 {
+    position: sticky;
+    top: 160px;
 }

@@ -127,6 +127,7 @@ const PropsTable = ({apiGet , apiPost , title , apiPostDoc}) => {
           },
         })
         .then((res) => {
+          setFiles({file: ''})
           setLoading(true)
           setFileName("Yuklandi")
           setSaveData(true)
@@ -166,6 +167,7 @@ const PropsTable = ({apiGet , apiPost , title , apiPostDoc}) => {
           })
         });
       }
+      
   return (
     <Box pt={'-10px'} height={'73vh'} overflow={'auto'}>
         <Box position={'sticky'} top={0} zIndex={2} bg={'#F6F7FB'}>
@@ -196,21 +198,23 @@ const PropsTable = ({apiGet , apiPost , title , apiPostDoc}) => {
             <Box>
               <Box pb={"25px"} display={"flex"} alignItems={"center"}>
                 <Box display={'flex'} border={'1px'} rounded={'3px'} alignItems={'center'} borderColor={'#B5BDC5'} >
-                  <input className={validateDate ? "success" : 'sucPre'}
-                    onChange={function(e) {
-                      if(e.target.value.match("[0-9*]")){
-                        e.target.value = ""
-                      } else {
-                        setVAlueData(e.target.value)
-                      }
-                     
-                    }}
-                    // width={"20%"}
-                    placeholder="Nomi..."
-                    // h={"2.7rem"}
-                    size="md"
-                    value={valueData}
-                  />
+                    <input className={validateDate ? "success" : 'sucPre'} 
+
+                      onChange={function(e) {
+                        if(e.target.value.match("[0-9*]")){
+                          e.target.value = ""
+                        } else {
+                          setVAlueData(e.target.value)
+                        }
+                      
+                      }}
+                      // width={"20%"}
+                      placeholder="Nomi..."
+                      // h={"2.7rem"}
+                      size="md"
+                      value={valueData}
+                    />
+
 
                   
                   <Button
@@ -237,22 +241,41 @@ const PropsTable = ({apiGet , apiPost , title , apiPostDoc}) => {
                   
                 </Box>
                 
+                
                   <Box display={"flex"} alignItems={"center"} gap={"15px"}>
                       <form action="" >
                         <input  className='input-field' hidden type="file" accept=".xlsx,.xls"  onChange={handleFile} />
                       </form>
+                      {!files.file.name ? (
                         <Button
-                          onClick={() => document.querySelector('.input-field').click()}
-                          _hover={"none"}
-                          color={"#fff"}
-                          padding={"11px 31px"}
-                          _active={"none"}
-                          bg={"#404E67"}
-                          borderRadius={"3px"}
-                          w={'120px'}
-                        >
-                          Exel
-                        </Button>
+                        onClick={() => document.querySelector('.input-field').click()}
+                        _hover={"none"}
+                        color={"#fff"}
+                        padding={"11px 31px"}
+                        _active={"none"}
+                        bg={"#404E67"}
+                        borderRadius={"3px"}
+                        w={'120px'}
+                      >
+                        Exel
+                      </Button>
+                      ): (
+                        <Button
+                        onClick={() => document.querySelector('.input-field').click()}
+                        _hover={"none"}
+                        color={"#fff"}
+                        padding={"11px 31px"}
+                        _active={"none"}
+                        bg={"#404E67"}
+                        borderRadius={"3px"}
+                        w={'120px'}
+                      >
+                        {files.file.name}
+                      </Button>
+                      )}
+                      
+
+                      
 
                     
                     
@@ -282,17 +305,17 @@ const PropsTable = ({apiGet , apiPost , title , apiPostDoc}) => {
                     </Button>}
                   </Box>
               </Box>
-              <Box border={'1px'} mb={'20px'} rounded={'10px'} borderColor={'#CECECE'} p={'10px'} display={'flex'} alignItems={'center'}>
-                <Search2Icon  color={'gray.500'}/>
-                <input onChange={(e) => setSearch(e.target.value)} type="" placeholder="Qidirish..." className="filter" />
-              </Box>
             </Box>
         
         )}
+        <Box border={'1px'} mb={'20px'} rounded={'10px'} borderColor={'#CECECE'} p={'10px'} display={'flex'} alignItems={'center'}>
+          <Search2Icon  color={'gray.500'}/>
+          <input onChange={(e) => setSearch(e.target.value)} type="" placeholder="Qidirish..." className="filter" />
+        </Box>
      
         </Box>
         <Table width={"100%"}  shadow={"0px 2px 8px 0px rgba(0, 0, 0, 0.12)"}rounded={"16px"} fontSize={"19px"}>
-                <Thead position={'sticky'} top={10} zIndex={1}>
+                <Thead className={open ? 'inp2' : 'inp'} zIndex={1}>
                 <Tr bg="#F1F3F9">
                     <Th
                     fontWeight={"bold"}
