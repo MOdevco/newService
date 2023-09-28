@@ -173,7 +173,7 @@ const PropsTable = ({ apiGet, apiPost, title, apiPostDoc }) => {
       });
   }
   return (
-    <Box pt={'-10px'} height={'76vh'} overflow={'auto'}>
+    <Box pt={'-10px'} height={'73vh'} overflow={'auto'}>
         <Box position={'sticky'} top={0} zIndex={2} bg={'#F6F7FB'}>
           <Box>
           <Box display={"Flex"} mb={'10px'} alignItems={"center"} justifyContent={'space-between'} gap="10px" >
