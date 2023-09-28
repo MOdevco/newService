@@ -1,13 +1,75 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Tabs, TabList, TabPanels, Tab, TabPanel} from '@chakra-ui/react'
 import TavarCatigoryEnd from "../tavarCatigoryEnd/tavarCatigoryEnd";
 import { Box } from "@chakra-ui/react";
 import TovarFirmalar from "../tovarFirmalar/tovarFirmalar";
 import PropsTable from "../propsTAble/propsTable";
+import { API } from "../../api";
+import axios from "axios";
+import { useToast } from '@chakra-ui/react'
+import { json } from "react-router-dom";
 
 const Asosiybody = () => {
 
+  const [tabsId , setTabsId] = useState('')
+  const [checkVal , setCheckVal] = useState([])
+  const toast = useToast()
+ 
+ 
+// togglecheckboxchange()
+ 
+  console.log(tabsId);
+  // const handeId = (e) =>{
+  //   const {value,click} = e.target
+  //   if(click){
+  //     setTabsId(pre => [...pre,value])
+  //   }else{
+  //     setTabsId(pre =>{
+  //       return [...pre.filter(skills => skills === value)]
+  //     })
+  //   }
+  // }
 
+
+  const handleValCheck = () => {
+    axios.post(`${API}api/category/attach`, {
+      "categoryId": tabsId,
+      "productCategoryTypes": checkVal
+    } ,{
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`
+      }
+    })
+    .then((res) => {
+      toast({
+        description: `${res.data.message}`,
+        status: 'success',
+        position: 'top-right',
+        duration: 2000,
+        isClosable: true,
+      })
+    }).catch((err) => {
+
+    })
+  }
+
+
+
+  const [data,setData] = useState([])
+  useEffect(() => {
+    axios
+      .get(`${API}api/category`, {
+        headers: {
+          // "ngrok-skip-browser-warning": true,
+          // "Access-Control-Allow-Origin": "*",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      })
+      .then((res) => {
+        setData(res.data);
+
+      });
+  }, []);
   
   return (
     <Box p={'40px'} pt={'0px'} height={'100%'} width={'100%'}>
@@ -90,13 +152,13 @@ const Asosiybody = () => {
           </TabPanel>
           <TabPanel maxWidth={"1832px"} m={"auto"}> 
           {/* TOVAR KATEGORIYALARI */}
-            <PropsTable title={'Tovar kategoriyalar'}  apiGet={'api/category-types'} apiPost={'api/category-types/new'} apiPostDoc={'api/category-types/upload'}/>
+            <PropsTable title={'Tovar kategoriyalar'}  apiGet={'api/category'}  apiPost={'api/category/new'}  apiPostDoc={'api/category/upload'} />
           {/* TOVAR KATEGORIYALARI */}
 
           </TabPanel>
           <TabPanel maxWidth={"1832px"} m={"auto"}> 
           {/* TOVAR TURLARI */}
-            <PropsTable title={'Tovar turlari'} apiGet={'api/category'} apiPost={'api/category/new'} apiPostDoc={'api/category/upload'} />
+            <PropsTable title={'Tovar turlari'}  apiGet={'api/category-types'} apiPost={'api/category-types/new'} apiPostDoc={'api/category-types/upload'} />
           {/* TOVAR TURLARI */}
 
           </TabPanel>
@@ -104,32 +166,22 @@ const Asosiybody = () => {
             <Box >
               <Tabs colorScheme='blue'>
                 <TabList>
-                  <Tab>Kabel</Tab>
-                  <Tab>Notifications</Tab>
-                  <Tab>Interations</Tab>
-                  <Tab>Plans</Tab>
-                  <Tab>Billing</Tab>
-                  <Tab>Account</Tab>
-                  <Tab>Notifications</Tab>
-                  <Tab>Interations</Tab>
-                  <Tab>Plans</Tab>
-                  <Tab>Billing</Tab>
-                  <Tab>Account</Tab>
-                  <Tab>Notifications</Tab>
-                  <Tab>Interations</Tab>
-                  <Tab>Plans</Tab>
-                  <Tab>Billing</Tab>
+                  {data.map((item,i) =>(
+                    <Box key={i} >
+                      <Tab onClick={() => setTabsId(item.id)} value={item.id}>{item.name}</Tab>
+                    </Box>
+                  ))}
+                  
                 </TabList>
-
                 <TabPanels>
                   <TabPanel>
-                    <TavarCatigoryEnd />
+                    <TavarCatigoryEnd setCheckVal={setCheckVal} handleValCheck={handleValCheck} />
                   </TabPanel>
                   <TabPanel>
-                    <p>two!</p>
+                    <TavarCatigoryEnd setCheckVal={setCheckVal} handleValCheck={handleValCheck} />
                   </TabPanel>
                   <TabPanel>
-                    <p>three!</p>
+                    <TavarCatigoryEnd setCheckVal={setCheckVal} handleValCheck={handleValCheck} />
                   </TabPanel>
                 </TabPanels>
               </Tabs>

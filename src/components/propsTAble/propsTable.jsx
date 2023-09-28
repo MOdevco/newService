@@ -1,186 +1,177 @@
-import { Box, Text } from "@chakra-ui/react";
+import { Box, Menu, MenuButton, MenuItem, MenuList, Text } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
+import { FcEditImage } from 'react-icons/fc'
+import { LuCopyPlus } from 'react-icons/lu'
 import {
-    Table,
-    Thead,
-    Tbody,
-    Tr,
-    Th,
-    Td,
-    TableContainer,
-    Button,
-    Input,
-  } from "@chakra-ui/react";
-import {MdOutlineMoreVert} from 'react-icons/md'
+  Table,
+  Thead,
+  Tbody,
+  Tr,
+  Th,
+  Td,
+  TableContainer,
+  Button,
+  Input,
+} from "@chakra-ui/react";
+import { MdDelete, MdOutlineMoreVert } from 'react-icons/md'
 import axios from "axios";
 import { API } from "../../api";
 import { useToast } from '@chakra-ui/react'
 import { AiFillDelete, AiFillMinusCircle, AiFillPlusCircle, AiOutlineCheckCircle, AiOutlineLeft, AiOutlineRight } from "react-icons/ai";
 import { Search2Icon } from "@chakra-ui/icons";
 
-const PropsTable = ({apiGet , apiPost , title , apiPostDoc}) => {
-    const monthNames = [
-        "January",
-        "February",
-        "March",
-        "April",
-        "May",
-        "June",
-        "July",
-        "August",
-        "September",
-        "October",
-        "November",
-        "December",
-      ];
-      const d = new Date();
-      let name = monthNames[d.getMonth()];
-      const [open, setopen] = useState(false);
-      const handleClick = () => setopen(!open);
-      const [data, setData] = useState([]);
-      const [valueData , setVAlueData] = useState('')
-      const [validateDate , setValiDate] = useState(false)
-      const toast = useToast()
-      const [files , setFiles] = useState({file: ''})
-      const [fileName , setFileName] = useState("Yuklash")
-      const [loading , setLoading] = useState(true)
-      const [saveData , setSaveData] = useState(false)
-      const [search , setSearch] = useState('')
-    
-      const handleFile = (e) => {
-        setFiles({...files, file: e.target.files[0]})
-      }
-    useEffect(() => {
-        axios
-          .get(`${API}${apiGet}`, {
-            headers: {
-              // "ngrok-skip-browser-warning": true,
-              // "Access-Control-Allow-Origin": "*",
-              Authorization: `Bearer ${localStorage.getItem("token")}`,
-            },
-          })
-          .then((res) => {
-            setData(res.data);  
-          });
-      }, []);
+const PropsTable = ({ apiGet, apiPost, title, apiPostDoc }) => {
+  const monthNames = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  ];
+  const d = new Date();
+  let name = monthNames[d.getMonth()];
+  const [open, setopen] = useState(false);
+  const handleClick = () => setopen(!open);
+  const [data, setData] = useState([]);
+  const [valueData, setVAlueData] = useState('')
+  const [validateDate, setValiDate] = useState(false)
+  const toast = useToast()
+  const [files, setFiles] = useState({ file: '' })
+  const [fileName, setFileName] = useState("Yuklash")
+  const [loading, setLoading] = useState(true)
+  const [saveData, setSaveData] = useState(false)
+  const [search, setSearch] = useState('')
 
-        const handleSubmit = () => {
-               
-                axios
-                .post(`${API}${apiPost}`,  {
-                  "name": valueData
-                }, {
-                  headers: {
-                    // "ngrok-skip-browser-warning": true,
-                    // "Access-Control-Allow-Origin": "*",
-                    Authorization: `Bearer ${localStorage.getItem("token")}`,
-                  },
-                })
-                .then((res) => {
-                  setVAlueData('')
-                  
-                  if(res.status === 200) {
-                    toast({
-                      description: `${res.data.message}`,
-                      status: 'success',
-                      position: 'top-right',
-                      duration: 2000,
-                      isClosable: true,
-                    })
-                      axios
-                      .get(`${API}${apiGet}`, {
-                        headers: {
-                          // "ngrok-skip-browser-warning": true,
-                          // "Access-Control-Allow-Origin": "*",
-                          Authorization: `Bearer ${localStorage.getItem("token")}`,
-                        },
-                      })
-                      .then((res) => {
-                        setData(res.data);
-                      });
-            
-                  }
-            
-                }).catch((err) => {
-                  toast({
-                    description: `${err.response.data.message}`,
-                    status: 'error',
-                    position: 'top-right',
-                    duration: 2000,
-                    isClosable: true,
-                  })
-                });
-              
-        }
 
-        
-          window.addEventListener('keydown' , (e) => {
-            if(e.key == "Enter") {
-              handleSubmit()
-            }
-          })
 
-        
-        
-      
-    
-      const handleSubmitDoc = () => {
-        const formData=  new FormData()
-        formData.append("file" , files.file)
-        setLoading(false)
-        if(!files.file) {
-          setLoading(true)
-        }
-        axios
-        .post(`${API}${apiPostDoc}`, formData, {
-          headers: {
-            // "ngrok-skip-browser-warning": true,
-            // "Access-Control-Allow-Origin": "*",
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-          },
-        })
-        .then((res) => {
-          setFiles({file: ''})
-          setLoading(true)
-          setFileName("Yuklandi")
-          setSaveData(true)
-          setTimeout(() => {
-            setFileName("Yuklash")
-            setSaveData(false)
-          } , 2000)
-          if(res.status === 200) {
-            toast({
-              description: `${res.data.message}`,
-              status: 'success',
-              position: 'top-right',
-              duration: 2000,
-              isClosable: true,
-            })
-              axios
-              .get(`${API}${apiGet}`, {
-                headers: {
-                  // "ngrok-skip-browser-warning": true,
-                  // "Access-Control-Allow-Origin": "*",
-                  Authorization: `Bearer ${localStorage.getItem("token")}`,
-                },
-              })
-              .then((res) => {
-                setData(res.data);
-              });
-    
-          }
-    
-        }).catch((err) => {
+  const handleFile = (e) => {
+    setFiles({ ...files, file: e.target.files[0] })
+  }
+  useEffect(() => {
+    axios
+      .get(`${API}${apiGet}`, {
+        headers: {
+          // "ngrok-skip-browser-warning": true,
+          // "Access-Control-Allow-Origin": "*",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      })
+      .then((res) => {
+        setData(res.data);
+      });
+  }, []);
+
+  const handleSubmit = () => {
+    axios
+      .post(`${API}${apiPost}`, {
+        "name": valueData
+      }, {
+        headers: {
+          // "ngrok-skip-browser-warning": true,
+          // "Access-Control-Allow-Origin": "*",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      })
+      .then((res) => {
+        setVAlueData('')
+
+        if (res.status === 200) {
           toast({
-            description: `File Tanlanmadi`,
-            status: 'error',
+            description: `${res.data.message}`,
+            status: 'success',
             position: 'top-right',
             duration: 2000,
             isClosable: true,
           })
-        });
-      }
-      
+          axios
+            .get(`${API}${apiGet}`, {
+              headers: {
+                // "ngrok-skip-browser-warning": true,
+                // "Access-Control-Allow-Origin": "*",
+                Authorization: `Bearer ${localStorage.getItem("token")}`,
+              },
+            })
+            .then((res) => {
+              setData(res.data);
+            });
+
+        }
+
+      }).catch((err) => {
+        toast({
+          description: `${err.response.data.message}`,
+          status: 'error',
+          position: 'top-right',
+          duration: 2000,
+          isClosable: true,
+        })
+      });
+  }
+
+
+
+  const handleSubmitDoc = () => {
+    const formData = new FormData()
+    formData.append("file", files.file)
+    setLoading(false)
+    if (!files.file) {
+      setLoading(true)
+    }
+    axios
+      .post(`${API}${apiPostDoc}`, formData, {
+        headers: {
+          // "ngrok-skip-browser-warning": true,
+          // "Access-Control-Allow-Origin": "*",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      })
+      .then((res) => {
+        setLoading(true)
+        setFileName("Yuklandi")
+        setSaveData(true)
+        setTimeout(() => {
+          setFileName("Yuklash")
+          setSaveData(false)
+        }, 2000)
+        if (res.status === 200) {
+          toast({
+            description: `${res.data.message}`,
+            status: 'success',
+            position: 'top-right',
+            duration: 2000,
+            isClosable: true,
+          })
+          axios
+            .get(`${API}${apiGet}`, {
+              headers: {
+                // "ngrok-skip-browser-warning": true,
+                // "Access-Control-Allow-Origin": "*",
+                Authorization: `Bearer ${localStorage.getItem("token")}`,
+              },
+            })
+            .then((res) => {
+              setData(res.data);
+            });
+
+        }
+
+      }).catch((err) => {
+        toast({
+          description: `File Tanlanmadi`,
+          status: 'error',
+          position: 'top-right',
+          duration: 2000,
+          isClosable: true,
+        })
+      });
+  }
   return (
     <Box pt={'-10px'} height={'76vh'} overflow={'auto'}>
         <Box position={'sticky'} top={0} zIndex={2} bg={'#F6F7FB'}>
@@ -189,7 +180,7 @@ const PropsTable = ({apiGet , apiPost , title , apiPostDoc}) => {
             <Box display={'flex'} alignItems={'center'}>
               <Text fontSize={'20px'} fontWeight={'500'}>{title}</Text>
               <Button
-              display={'flex'}
+                display={'flex'}
                 pt={'8px'}
                 bg={"transparent"}
                 _hover={""}
@@ -200,49 +191,50 @@ const PropsTable = ({apiGet , apiPost , title , apiPostDoc}) => {
                   <AiFillMinusCircle color="#B10202" />
                 ) : (
                   <AiFillPlusCircle color="#4CAF50" />
-                  )}
+                )}
 
               </Button>
             </Box>
           </Box>
-          
-          </Box>
-          {open && (
-            <Box>
-              <Box pb={"25px"} display={"flex"} alignItems={"center"}>
-                <Box display={'flex'} border={'1px'} rounded={'3px'} alignItems={'center'} borderColor={'#B5BDC5'} >
-                    <input className={validateDate ? "success" : 'sucPre'} 
 
-                      onChange={function(e) {
-                        if(e.target.value.match("[0-9*]")){
-                          e.target.value = ""
-                        } else {
-                          setVAlueData(e.target.value)
-                        }
-                      
-                      }}
-                      // width={"20%"}
-                      placeholder="Nomi..."
-                      // h={"2.7rem"}
-                      size="md"
-                      value={valueData}
-                    />
+        </Box>
+        {open && (
+          <Box>
+            <Box pb={"25px"} display={"flex"} alignItems={"center"}>
+              <Box display={'flex'} border={'1px'} h={'40px'} rounded={'3px'} alignItems={'center'} borderColor={'#B5BDC5'} >
+                <form action="" onSubmit={(e) => {
+                  e.preventDefault()
+                  handleSubmit()
+                }}>
+                  <input id="input" className={validateDate ? "success" : 'sucPre'}
+                    onChange={function (e) {
+                      if (e.target.value.match("[0-9*]")) {
+                        e.target.value = ""
+                      } else {
+                        setVAlueData(e.target.value)
+                      }
+
+                    }}
+                    // width={"20%"}
+                    placeholder="Nomi..."
+                    // h={"2.7rem"}
+                    size="md"
+                    value={valueData}
+                  />
 
 
-                  
                   <Button
-                    onClick={function(e) {
-                      if(!valueData == '') {
+                    onClick={function () {
+
+                      if (!valueData == '') {
                         handleSubmit()
-                        if(!valueData === '') {
+                        if (!valueData === '') {
                           setValiDate(false)
                         }
                       } else {
                         setValiDate(true)
                       }
                     }}
-                    
-                  
                     bg={"#4CAF50"}
                     color={"#fff"}
                     borderRadius={"3px"}
@@ -252,75 +244,56 @@ const PropsTable = ({apiGet , apiPost , title , apiPostDoc}) => {
                   >
                     Qo’shish
                   </Button>
-                  
-                </Box>
-                
-                
-                  <Box display={"flex"} alignItems={"center"} gap={"15px"}>
-                      <form action="" >
-                        <input  className='input-field' hidden type="file" accept=".xlsx,.xls"  onChange={handleFile} />
-                      </form>
-                      {!files.file.name ? (
-                        <Button
-                        onClick={() => document.querySelector('.input-field').click()}
-                        _hover={"none"}
-                        color={"#fff"}
-                        padding={"11px 31px"}
-                        _active={"none"}
-                        bg={"#404E67"}
-                        borderRadius={"3px"}
-                        w={'120px'}
-                      >
-                        Exel
-                      </Button>
-                      ): (
-                        <Button
-                        onClick={() => document.querySelector('.input-field').click()}
-                        _hover={"none"}
-                        color={"#fff"}
-                        padding={"11px 31px"}
-                        _active={"none"}
-                        bg={"#404E67"}
-                        borderRadius={"3px"}
-                        w={'120px'}
-                      >
-                        {files.file.name}
-                      </Button>
-                      )}
-                      
+                </form>
+              </Box>
 
-                      
+              <Box pl={"15px"} display={"flex"} alignItems={"center"} gap={"15px"}>
+                <form action="" >
+                  <input className='input-field' hidden type="file" accept=".xlsx,.xls" onChange={handleFile} />
+                </form>
+                <Button
+                  onClick={() => document.querySelector('.input-field').click()}
+                  _hover={"none"}
+                  color={"#fff"}
+                  padding={"11px 31px"}
+                  _active={"none"}
+                  bg={"#404E67"}
+                  borderRadius={"3px"}
+                >
+                  Exel
+                </Button>
 
-                    
-                    
-                    {loading && <Button
-                      onClick={handleSubmitDoc}
-                      _hover={"none"}
-                      color={"#fff"}
-                      padding={"11px 31px"}
-                      _active={"none"}
-                      bg={saveData ? "green" : "#3A69BB"}
-                      borderRadius={"3px"}
-                    >
-                      {fileName}
-                      {saveData &&< AiOutlineCheckCircle color="white" fontSize={'25px'} /> }
-                    </Button>}
 
-                   {!loading && <Button
-                      isLoading
-                      loadingText='Yuklanmoqda...'
-                      spinnerPlacement='end'
-                      color={"#fff"}
-                      bg={"#3A69BB"}
-                      borderRadius={"3px"}
-                      _hover={{bg: ''}}
-                    >
-                      Continue
-                    </Button>}
-                  </Box>
+
+                {loading && <Button
+                  onClick={handleSubmitDoc}
+                  _hover={"none"}
+                  color={"#fff"}
+                  padding={"11px 31px"}
+                  _active={"none"}
+                  bg={saveData ? "green" : "#3A69BB"}
+                  borderRadius={"3px"}
+                >
+                  {fileName}
+                  {saveData && < AiOutlineCheckCircle color="white" fontSize={'25px'} />}
+                </Button>}
+
+                {!loading && <Button
+                  isLoading
+                  loadingText='Yuklanmoqda...'
+                  spinnerPlacement='end'
+                  color={"#fff"}
+                  bg={"#3A69BB"}
+                  borderRadius={"3px"}
+                  _hover={{ bg: '' }}
+                >
+                  Continue
+                </Button>}
               </Box>
             </Box>
-        
+           
+          </Box>
+
         )}
         <Box border={'1px'} mb={'20px'} rounded={'10px'} borderColor={'#CECECE'} p={'10px'} display={'flex'} alignItems={'center'}>
           <Search2Icon  color={'gray.500'}/>
