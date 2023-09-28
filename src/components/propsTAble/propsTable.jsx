@@ -182,7 +182,7 @@ const PropsTable = ({apiGet , apiPost , title , apiPostDoc}) => {
       }
       
   return (
-    <Box pt={'-10px'} height={'73vh'} overflow={'auto'}>
+    <Box pt={'-10px'} height={'76vh'} overflow={'auto'}>
         <Box position={'sticky'} top={0} zIndex={2} bg={'#F6F7FB'}>
           <Box>
           <Box display={"Flex"} mb={'10px'} alignItems={"center"} justifyContent={'space-between'} gap="10px" >
@@ -375,11 +375,12 @@ const PropsTable = ({apiGet , apiPost , title , apiPostDoc}) => {
                     <Td>{i + 1}</Td>
                     <Td w={"50%"}>{item.name}</Td>
                     <Td>
-                        {String(item.date).slice(0, 4) +
+                        {String(item.date).slice(8, 10)+
                         " " +
                         `${name}` +
                         " " +
-                        String(item.date).slice(8, 10) +
+                        
+                        String(item.date).slice(0, 4) +
                         " " +
                         String(item.date).slice(11, 16)}
                     </Td>
