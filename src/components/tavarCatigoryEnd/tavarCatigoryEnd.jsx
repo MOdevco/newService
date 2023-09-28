@@ -85,7 +85,7 @@ function TavarCatigoryEnd({setCheckVal , handleValCheck}) {
               {data.map((item,i) =>(
                 <Tr key={i} bg={i % 2 == 1 ? '#F8F9FC' : ''}>
                   
-                  <Td w={'0%'}  ><Checkbox size='lg' colorScheme='purple' value={item.id}  onChange={handleChange} ></Checkbox></Td>
+                  <Td w={'0%'}  ><Checkbox size='lg' colorScheme='purple' value={item.id} checked={item.id == item.productCategoryTypes ? true : false} onChange={handleChange} ></Checkbox></Td>
                   <Td  w={'50%'}>{item.name}</Td>
                   <Td> {String(item.date).slice(0, 4) +
                     " " +
