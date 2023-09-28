@@ -18,7 +18,23 @@ import {
 import axios from 'axios';
 import { API } from '../../api';
 import { AiFillMinusCircle, AiFillPlusCircle } from 'react-icons/ai';
-function TavarCatigoryEnd() {
+function TavarCatigoryEnd({setCheckVal , handleValCheck}) {
+
+  // const [checkedValue,setValue] = useState([])
+  
+  
+  const handleChange = (e) =>{
+    const {value,checked} = e.target
+
+    if(checked){
+      setCheckVal(pre => [...pre,value])
+    }else{
+      setValue(pre =>{
+        return [...pre.filter(skill => skill === value)]
+      })
+    }
+  }
+
     // const monthNames = [
     //   "January",
     //   "February",
@@ -35,85 +51,25 @@ function TavarCatigoryEnd() {
     // ];
     // const d = new Date();
     // let name = monthNames[d.getMonth()];
-    // const [data,setData] = useState([])
     // const [open, setopen] = useState(false);
     // const handleClick = () => setopen(!open);
-    // useEffect(() => {
-    //     axios
-    //       .get(`${API}api/category-types`, {
-    //         headers: {
-    //           // "ngrok-skip-browser-warning": true,
-    //           // "Access-Control-Allow-Origin": "*",
-    //           Authorization: `Bearer ${localStorage.getItem("token")}`,
-    //         },
-    //       })
-    //       .then((res) => {
-    //         setData(res.data);
-    //       });
-    //   }, []);
+    const [data,setData] = useState([])
+    useEffect(() => {
+        axios
+          .get(`${API}api/category-types`, {
+            headers: {
+              // "ngrok-skip-browser-warning": true,
+              // "Access-Control-Allow-Origin": "*",
+              Authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
+          })
+          .then((res) => {
+            setData(res.data);
+          });
+      }, []);
+
   return (
     <Box>
-      {/* <Box>
-      <Box display={"Flex"} alignItems={"center"} gap="10px" mt={"35px"}>
-        <Button
-          bg={"transparent"}
-          _hover={""}
-          _active={""}
-          onClick={handleClick}
-        >
-          {open ? (
-            <AiFillMinusCircle color="#B10202" />
-          ) : (
-            <AiFillPlusCircle color="#4CAF50" />
-          )}
-        </Button>
-      </Box>
-      {open && (
-        <Box pb={"25px"} display={"flex"} alignItems={"center"}>
-          <Input
-            width={"20%"}
-            placeholder="Ventilyator"
-            h={"2.4rem"}
-            size="md"
-            borderRightRadius={"none"}
-          />
-          <Button
-            bg={"#4CAF50"}
-            color={"#fff"}
-            size="md"
-            borderRadius={"3px"}
-            _hover={"none"}
-            _active={"none"}
-          >
-            Qo’shish
-          </Button>
-          <Box pl={"15px"} display={"flex"} alignItems={"center"} gap={"15px"}>
-            <Button
-              _hover={"none"}
-              color={"#fff"}
-              padding={"11px 31px"}
-              _active={"none"}
-              bg={"#404E67"}
-              borderRadius={"3px"}
-            >
-              Excel
-            </Button>
-            <Button
-              _hover={"none"}
-              color={"#fff"}
-              padding={"11px 31px"}
-              _active={"none"}
-              bg={"#3A69BB"}
-              borderRadius={"3px"}
-            >
-              Yuklash
-            </Button>
-          </Box>
-        </Box>
-      )}
-
-     
-      </Box> */}
         <TableContainer shadow={"0px 2px 8px 0px rgba(0, 0, 0, 0.12)"}>
           <Table width={"100%"} rounded={"16px"} fontSize={'19px'}>
             <Thead>
@@ -126,45 +82,26 @@ function TavarCatigoryEnd() {
               </Tr>
             </Thead>
             <Tbody>
-                <Tr>
-                  <Td w={'0%'}  ><Checkbox size='lg' colorScheme='purple' ></Checkbox></Td>
-                  <Td  w={'50%'}>Aux</Td>
-                  <Td>20 Okt 2023</Td>
+              {data.map((item,i) =>(
+                <Tr key={i} bg={i % 2 == 1 ? '#F8F9FC' : ''}>
+                  
+                  <Td w={'0%'}  ><Checkbox size='lg' colorScheme='purple' value={item.id}  onChange={handleChange} ></Checkbox></Td>
+                  <Td  w={'50%'}>{item.name}</Td>
+                  <Td> {String(item.date).slice(0, 4) +
+                    " " +
+                    `${name}` +
+                    " " +
+                    String(item.date).slice(8, 10) +
+                    " " +
+                    String(item.date).slice(11, 16)}</Td>
                   <Td>Komiljon Soliyev Xaydarovich</Td>
                 </Tr>    
-                <Tr>
-                  <Td><Checkbox size='lg' colorScheme='purple' ></Checkbox></Td>
-                  <Td>TypeC - USB</Td>
-                  <Td>20 Okt 2023</Td>
-                  <Td>Komiljon Soliyev Xaydarovich</Td>
-                </Tr>    
-                <Tr>
-                  <Td><Checkbox size='lg' colorScheme='purple' ></Checkbox></Td>
-                  <Td>Aux - Type C</Td>
-                  <Td>20 Okt 2023</Td>
-                  <Td>Komiljon Soliyev Xaydarovich</Td>
-                </Tr>    
-                <Tr>
-                  <Td><Checkbox size='lg' colorScheme='purple' ></Checkbox></Td>
-                  <Td>HDMI - HDMI</Td>
-                  <Td>20 Okt 2023</Td>
-                  <Td>Komiljon Soliyev Xaydarovich</Td>
-                </Tr>   
-                <Tr>
-                  <Td><Checkbox size='lg' colorScheme='purple' ></Checkbox></Td>
-                  <Td>HDMI - Type - C</Td>
-                  <Td>20 Okt 2023</Td>
-                  <Td>Komiljon Soliyev Xaydarovich</Td>
-                </Tr> 
-                <Tr>
-                  <Td><Checkbox size='lg' colorScheme='purple' ></Checkbox></Td>
-                  <Td>Micro</Td>
-                  <Td>20 Okt 2023</Td>
-                  <Td>Komiljon Soliyev Xaydarovich</Td>
-                </Tr>               
+              ))}
+                          
             </Tbody>
           </Table>
         </TableContainer>
+        <Button onClick={handleValCheck}>Send</Button>
       </Box>
   )
 }

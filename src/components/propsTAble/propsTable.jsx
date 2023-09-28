@@ -49,7 +49,7 @@ const PropsTable = ({ apiGet, apiPost, title, apiPostDoc }) => {
   const [saveData, setSaveData] = useState(false)
   const [search, setSearch] = useState('')
 
- 
+
 
   const handleFile = (e) => {
     setFiles({ ...files, file: e.target.files[0] })
@@ -201,49 +201,49 @@ const PropsTable = ({ apiGet, apiPost, title, apiPostDoc }) => {
         {open && (
           <Box>
             <Box pb={"25px"} display={"flex"} alignItems={"center"}>
-              <Box display={'flex'} border={'1px'} rounded={'3px'} alignItems={'center'} borderColor={'#B5BDC5'} >
+              <Box display={'flex'} border={'1px'} h={'40px'} rounded={'3px'} alignItems={'center'} borderColor={'#B5BDC5'} >
                 <form action="" onSubmit={(e) => {
                   e.preventDefault()
                   handleSubmit()
                 }}>
-                <input id="input" className={validateDate ? "success" : 'sucPre'}
-                  onChange={function (e) {
-                    if (e.target.value.match("[0-9*]")) {
-                      e.target.value = ""
-                    } else {
-                      setVAlueData(e.target.value)
-                    }
-
-                  }}
-                  // width={"20%"}
-                  placeholder="Nomi..."
-                  // h={"2.7rem"}
-                  size="md"
-                  value={valueData}
-                />
-
-
-                <Button
-                  onClick={function () {
-
-                    if (!valueData == '') {
-                      handleSubmit()
-                      if (!valueData === '') {
-                        setValiDate(false)
+                  <input id="input" className={validateDate ? "success" : 'sucPre'}
+                    onChange={function (e) {
+                      if (e.target.value.match("[0-9*]")) {
+                        e.target.value = ""
+                      } else {
+                        setVAlueData(e.target.value)
                       }
-                    } else {
-                      setValiDate(true)
-                    }
-                  }}
-                  bg={"#4CAF50"}
-                  color={"#fff"}
-                  borderRadius={"3px"}
-                  rounded={'3px'}
-                  _hover={"none"}
-                  _active={"none"}
-                >
-                  Qo’shish
-                </Button>
+
+                    }}
+                    // width={"20%"}
+                    placeholder="Nomi..."
+                    // h={"2.7rem"}
+                    size="md"
+                    value={valueData}
+                  />
+
+
+                  <Button
+                    onClick={function () {
+
+                      if (!valueData == '') {
+                        handleSubmit()
+                        if (!valueData === '') {
+                          setValiDate(false)
+                        }
+                      } else {
+                        setValiDate(true)
+                      }
+                    }}
+                    bg={"#4CAF50"}
+                    color={"#fff"}
+                    borderRadius={"3px"}
+                    rounded={'3px'}
+                    _hover={"none"}
+                    _active={"none"}
+                  >
+                    Qo’shish
+                  </Button>
                 </form>
               </Box>
 
@@ -361,15 +361,15 @@ const PropsTable = ({ apiGet, apiPost, title, apiPostDoc }) => {
                   alignItems={"flex-end"}
                   justifyContent={"flex-end"}
                 >
-                 
+
                   <Menu>
                     {({ isOpen }) => (
                       <>
                         <MenuButton _hover={''} bg={'transparent'} _active={''} isActive={isOpen} as={Button}>
-                        <MdOutlineMoreVert size={"29px"} />
+                          <MdOutlineMoreVert size={"29px"} />
                         </MenuButton>
                         <MenuList>
-                          <MenuItem onClick={ () => filtered()} display={'flex'} alignItems={'center'} gap={'10px'} fontSize={'15px'}> <MdDelete fontSize={'23px'} /> Delete</MenuItem>
+                          <MenuItem onClick={() => filtered()} display={'flex'} alignItems={'center'} gap={'10px'} fontSize={'15px'}> <MdDelete fontSize={'23px'} /> Delete</MenuItem>
                           <MenuItem display={'flex'} alignItems={'center'} gap={'10px'}>  <LuCopyPlus fontSize={'20px'} /> Create a Copy</MenuItem>
                         </MenuList>
                       </>
