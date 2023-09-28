@@ -117,6 +117,7 @@ const PropsTable = ({apiGet , apiPost , title , apiPostDoc}) => {
           window.addEventListener('keydown' , (e) => {
             if(e.key == "Enter") {
               handleSubmit()
+              setVAlueData('')
             }
           })
 
