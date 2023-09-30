@@ -146,7 +146,7 @@ const TovarFirmalar = () => {
 
                                 <FormControl isRequired>
                                     <FormLabel>Telefon</FormLabel>
-                                    <Input onChange={(e) => setDataVal({ ...dataVal, tel: e.target.value })} value={dataVal.tel} placeholder='Telefon..' />
+                                    <Input onChange={(e) => setDataVal({ ...dataVal, tel: e.target.value })} value={dataVal.tel} type='number' placeholder='Telefon..' />
                                 </FormControl>
 
                                 <FormControl isRequired>
