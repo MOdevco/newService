@@ -10,16 +10,12 @@ import { useToast } from '@chakra-ui/react'
 import { json } from "react-router-dom";
 
 const Asosiybody = () => {
-
   const toast = useToast()
-  const [da , setDa] = useState([])
+  const [tabsId,setTabsId] = useState([])
+
   
-
-
-  const [tabsId, setTabsId] = useState('')
- 
-
   const [checkVal, setCheckVal] = useState([])
+  console.log(tabsId);
   const handleValCheck = () => {
     axios.post(`${API}api/category/attach`, {
       "categoryId": tabsId,
@@ -61,7 +57,7 @@ const Asosiybody = () => {
 
   return (
     <Box p={'40px'} pt={'0px'} height={'100%'} width={'100%'}>
-      {/* birinvchi table */}
+      {/* birinvhi table */}
       <Tabs variant='red' >
         <TabList >
           <Tab
@@ -151,7 +147,7 @@ const Asosiybody = () => {
 
           </TabPanel>
           <TabPanel maxWidth={"1832px"} m={"auto"}>
-            <TavarCatigoryEnd  handleValCheck={handleValCheck} setCheckVal={setCheckVal} setTabsId={setTabsId}/>
+            <TavarCatigoryEnd  setTabsId={setTabsId} handleValCheck={handleValCheck} data1={data1}/>
           </TabPanel>
           <TabPanel maxWidth={"1832px"} m={"auto"}>
             {/* SOTUV TURLARI */}
@@ -172,15 +168,6 @@ const Asosiybody = () => {
 
         </TabPanels>
       </Tabs>
-
-
-
-
-
-
-
-
-
 
     </Box>
   );

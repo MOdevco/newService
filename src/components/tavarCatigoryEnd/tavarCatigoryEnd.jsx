@@ -20,42 +20,32 @@ import { MdOutlineMoreVert } from "react-icons/md";
 import axios from 'axios';
 import { API } from '../../api';
 import { AiFillMinusCircle, AiFillPlusCircle } from 'react-icons/ai';
-function TavarCatigoryEnd({ handleValCheck, setCheckVal, setTabsId }) {
+function TavarCatigoryEnd({ handleValCheck, setCheckVal,  setTabsId,handleChange }) {
   const [data, setData] = useState([])
   const [v, setV] = useState('')
   const [q, setQ] = useState([])
   let X = []
   let Y = []
- 
+
   X = data.map((item, i) => item.id)
   Y = q.map((item, i) => item.id)
+  
+  const [checkedVal,setValue] = useState('')
 
-  const [checkedValues, setValue] = useState([])
-  console.log(checkedValues);
-
-  const handleChange = (e) => {
-    const { value, checked } = e.target
-
-    if (checked) {
-      setCheckVal(pre => [...pre, value])
-    } else {
-      setValue(pre => {
-        return [...pre.filter(skill => skill === value)]
-      })
-    }
-  }
-
-
-  const handeId = (e) => {
-    const { value, click } = e.target
-    if (click) {
-      setTabsId(pre => [...pre, value])
-    } else {
-      setTabsId(pre => {
+  function handelChange(e) {
+    const {value,checked} = e.target
+    if(checked) {
+      setValue(pre =>[...pre,value])
+    }else{
+      setValue(pre =>{
         return [...pre.filter(skills => skills === value)]
       })
     }
   }
+  console.log(checkedVal);
+
+
+ 
 
 
   useEffect(() => {
@@ -71,6 +61,7 @@ function TavarCatigoryEnd({ handleValCheck, setCheckVal, setTabsId }) {
         setData(res.data);
       });
   }, []);
+
 
 
   const [data1, setData1] = useState([])
@@ -92,17 +83,16 @@ function TavarCatigoryEnd({ handleValCheck, setCheckVal, setTabsId }) {
   return (
     <Box>
 
-      <Box >
+      <Box>
         <Tabs colorScheme='blue'>
           <TabList>
             {data1.map((item, i) => (
               <Box key={i} >
                 <Tab onClick={function () {
-                  setV(item.name)
+                  setV(item.id)
                   setQ(item.productCategoryTypes)
 
                 }
-
                 } value={item.id} onChange={setTabsId(item.id)} >{item.name}</Tab>
               </Box>
             ))}
@@ -110,7 +100,7 @@ function TavarCatigoryEnd({ handleValCheck, setCheckVal, setTabsId }) {
           </TabList>
           <TabPanels>
             <TabPanel>
-
+                
             </TabPanel>
             <TabPanel>
 
@@ -142,7 +132,7 @@ function TavarCatigoryEnd({ handleValCheck, setCheckVal, setTabsId }) {
                 return (
                   <Tr key={i} bg={i % 2 == 1 ? '#F8F9FC' : ''}>
 
-                    <Td w={'0%'}>  <Checkbox size='lg' colorScheme='purple' value={item.id} isChecked onChange={handleChange} ></Checkbox></Td>
+                    <Td w={'0%'}>  <Checkbox size='lg' colorScheme='purple' ></Checkbox></Td>
                     <Td w={'50%'}>{item.name}</Td>
                     <Td> {String(item.date).slice(0, 4) +
                       " " +
@@ -158,7 +148,7 @@ function TavarCatigoryEnd({ handleValCheck, setCheckVal, setTabsId }) {
                 return (
                   <Tr key={i} bg={i % 2 == 1 ? '#F8F9FC' : ''}>
 
-                    <Td w={'0%'}>  <Checkbox size='lg' colorScheme='purple' value={item.id} onChange={handleChange} ></Checkbox></Td>
+                    <Td w={'0%'}>  <Checkbox size='lg' colorScheme='purple' onChange={handelChange} value={item.id}></Checkbox></Td>
                     <Td w={'50%'}>{item.name}</Td>
                     <Td> {String(item.date).slice(0, 4) +
                       " " +
@@ -176,15 +166,15 @@ function TavarCatigoryEnd({ handleValCheck, setCheckVal, setTabsId }) {
           </Tbody>
         </Table>
       </TableContainer>
-      <Box display={'flex'} alignItems={'flex-end'} w={'100%'} justifyContent={'flex-end'}>
-      <Button _hover={'none'} _active={'none'} mt={'15px'} bg={'green'} color={'white'} onClick={handleValCheck}>Send</Button>
+      <Box display={'flex'} alignItems={'flex-end'} mt={'15px'} justifyContent={'flex-end'}>
+      <Button _hover={'none'} _active={'none'} bg={'green.400'} color={'white'} onClick={handleValCheck}>Send</Button>
       </Box>
 
       {X.map(function (l) {
         if (Y.includes(l)) {
-          console.log(true);
+          // console.log(true);
         } else {
-          console.log(false);
+          // console.log(false);
         }
       })}
 
