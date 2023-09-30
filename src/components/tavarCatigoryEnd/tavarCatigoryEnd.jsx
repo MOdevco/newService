@@ -35,24 +35,7 @@ function TavarCatigoryEnd({setCheckVal , handleValCheck}) {
     }
   }
 
-    // const monthNames = [
-    //   "January",
-    //   "February",
-    //   "March",
-    //   "April",
-    //   "May",
-    //   "June",
-    //   "July",
-    //   "August",
-    //   "September",
-    //   "October",
-    //   "November",
-    //   "December",
-    // ];
-    // const d = new Date();
-    // let name = monthNames[d.getMonth()];
-    // const [open, setopen] = useState(false);
-    // const handleClick = () => setopen(!open);
+
     const [data,setData] = useState([])
     useEffect(() => {
         axios
@@ -85,7 +68,7 @@ function TavarCatigoryEnd({setCheckVal , handleValCheck}) {
               {data.map((item,i) =>(
                 <Tr key={i} bg={i % 2 == 1 ? '#F8F9FC' : ''}>
                   
-                  <Td w={'0%'}  ><Checkbox size='lg' colorScheme='purple' value={item.id}  onChange={handleChange} ></Checkbox></Td>
+                  <Td w={'0%'}><Checkbox size='lg' colorScheme='purple' value={item.id} onChange={handleChange}></Checkbox></Td>
                   <Td  w={'50%'}>{item.name}</Td>
                   <Td> {String(item.date).slice(0, 4) +
                     " " +
@@ -97,7 +80,6 @@ function TavarCatigoryEnd({setCheckVal , handleValCheck}) {
                   <Td>Komiljon Soliyev Xaydarovich</Td>
                 </Tr>    
               ))}
-                          
             </Tbody>
           </Table>
         </TableContainer>
