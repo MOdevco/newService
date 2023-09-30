@@ -174,8 +174,8 @@ const PropsTable = ({ apiGet, apiPost, title, apiPostDoc }) => {
   }
   return (
     <Box pt={'-10px'} height={'73vh'} overflow={'auto'}>
-      <Box position={'sticky'} top={0} zIndex={2} bg={'#F6F7FB'}>
-        <Box>
+        <Box position={'sticky'} top={0} zIndex={2} bg={'#F6F7FB'}>
+          <Box>
           <Box display={"Flex"} mb={'10px'} alignItems={"center"} justifyContent={'space-between'} gap="10px" >
             <Box display={'flex'} alignItems={'center'}>
               <Text fontSize={'20px'} fontWeight={'500'}>{title}</Text>
@@ -291,95 +291,84 @@ const PropsTable = ({ apiGet, apiPost, title, apiPostDoc }) => {
                 </Button>}
               </Box>
             </Box>
-            <Box border={'1px'} mb={'20px'} rounded={'10px'} borderColor={'#CECECE'} p={'10px'} display={'flex'} alignItems={'center'}>
-              <Search2Icon color={'gray.500'} />
-              <input onChange={(e) => setSearch(e.target.value)} type="" placeholder="Qidirish..." className="filter" />
-            </Box>
+           
           </Box>
 
         )}
-
-      </Box>
-      <Table width={"100%"} shadow={"0px 2px 8px 0px rgba(0, 0, 0, 0.12)"} rounded={"16px"} fontSize={"19px"}>
-        <Thead position={'sticky'} top={10} zIndex={1}>
-          <Tr bg="#F1F3F9">
-            <Th
-              fontWeight={"bold"}
-              color={"#1D2433"}
-              textTransform={"capitalize"}
-              fontSize={"17px"}
-            >
-              №
-            </Th>
-            <Th
-              fontWeight={"bold"}
-              color={"#1D2433"}
-              textTransform={"capitalize"}
-              fontSize={"17px"}
-            >
-              Nomi
-            </Th>
-            <Th
-              fontWeight={"bold"}
-              color={"#1D2433"}
-              textTransform={"capitalize"}
-              fontSize={"17px"}
-            >
-              Qo’shilgan sana
-            </Th>
-            <Th
-              fontWeight={"bold"}
-              color={"#1D2433"}
-              textTransform={"capitalize"}
-              fontSize={"17px"}
-            >
-              User
-            </Th>
-            <Th></Th>
-          </Tr>
-        </Thead>
-        <Tbody bg={'white'}>
-          {data.filter((item => {
-            return search.toLowerCase() == '' ? item : item.name.toLowerCase().includes(search)
-          }))
-            .map((item, i) => (
-              <Tr key={i} bg={i % 2 == 1 ? '#F8F9FC' : ''}>
-                <Td>{i + 1}</Td>
-                <Td w={"50%"}>{item.name}</Td>
-                <Td>
-                  {String(item.date).slice(0, 4) +
-                    " " +
-                    `${name}` +
-                    " " +
-                    String(item.date).slice(8, 10) +
-                    " " +
-                    String(item.date).slice(11, 16)}
-                </Td>
-                <Td>Komiljon Soliyev Xaydarovich</Td>
-                <Td
-                  display={"flex"}
-                  alignItems={"flex-end"}
-                  justifyContent={"flex-end"}
-                >
-
-                  <Menu>
-                    {({ isOpen }) => (
-                      <>
-                        <MenuButton _hover={''} bg={'transparent'} _active={''} isActive={isOpen} as={Button}>
-                          <MdOutlineMoreVert size={"29px"} />
-                        </MenuButton>
-                        <MenuList>
-                          <MenuItem onClick={() => filtered()} display={'flex'} alignItems={'center'} gap={'10px'} fontSize={'15px'}> <MdDelete fontSize={'23px'} /> Delete</MenuItem>
-                          <MenuItem display={'flex'} alignItems={'center'} gap={'10px'}>  <LuCopyPlus fontSize={'20px'} /> Create a Copy</MenuItem>
-                        </MenuList>
-                      </>
-                    )}
-                  </Menu>
-                </Td>
-              </Tr>
-            ))}
-        </Tbody>
-      </Table>
+        <Box border={'1px'} mb={'20px'} rounded={'10px'} borderColor={'#CECECE'} p={'10px'} display={'flex'} alignItems={'center'}>
+          <Search2Icon  color={'gray.500'}/>
+          <input onChange={(e) => setSearch(e.target.value)} type="" placeholder="Qidirish..." className="filter" />
+        </Box>
+     
+        </Box>
+        <Table width={"100%"}  shadow={"0px 2px 8px 0px rgba(0, 0, 0, 0.12)"}rounded={"16px"} fontSize={"19px"}>
+                <Thead className={open ? 'inp2' : 'inp'} zIndex={1}>
+                <Tr bg="#F1F3F9">
+                    <Th
+                    fontWeight={"bold"}
+                    color={"#1D2433"}
+                    textTransform={"capitalize"}
+                    fontSize={"17px"}
+                    >
+                    №
+                    </Th>
+                    <Th
+                    fontWeight={"bold"}
+                    color={"#1D2433"}
+                    textTransform={"capitalize"}
+                    fontSize={"17px"}
+                    >
+                    Nomi
+                    </Th>
+                    <Th
+                    fontWeight={"bold"}
+                    color={"#1D2433"}
+                    textTransform={"capitalize"}
+                    fontSize={"17px"}
+                    >
+                    Qo’shilgan sana
+                    </Th>
+                    <Th
+                    fontWeight={"bold"}
+                    color={"#1D2433"}
+                    textTransform={"capitalize"}
+                    fontSize={"17px"}
+                    >
+                    User
+                    </Th>
+                    <Th></Th>
+                </Tr>
+                </Thead>
+                <Tbody bg={'white'}>
+                {data.filter((item => {
+                    return search.toLowerCase() == '' ? item : item.name.toLowerCase().includes(search)
+                  }))
+                .map((item, i) => (
+                    <Tr key={i} bg={i%2 == 1 ? '#F8F9FC' : ''}>
+                    <Td>{i + 1}</Td>
+                    <Td w={"50%"}>{item.name}</Td>
+                    <Td>
+                        {String(item.date).slice(8, 10)+
+                        " " +
+                        `${name}` +
+                        " " +
+                        
+                        String(item.date).slice(0, 4) +
+                        " " +
+                        String(item.date).slice(11, 16)}
+                    </Td>
+                    <Td>Komiljon Soliyev Xaydarovich</Td>
+                    <Td
+                        display={"flex"}
+                        alignItems={"flex-end"}
+                        justifyContent={"flex-end"}
+                    >
+                        <MdOutlineMoreVert size={"29px"} />
+                    </Td>
+                    </Tr>
+                ))}
+                </Tbody>
+        </Table>
     </Box>
   )
 }
