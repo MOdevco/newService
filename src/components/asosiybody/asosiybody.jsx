@@ -12,10 +12,8 @@ import { json } from "react-router-dom";
 const Asosiybody = () => {
   const toast = useToast()
   const [tabsId,setTabsId] = useState([])
-
-  
   const [checkVal, setCheckVal] = useState([])
-  console.log(tabsId);
+  // console.log(tabsId);
   const handleValCheck = () => {
     axios.post(`${API}api/category/attach`, {
       "categoryId": tabsId,
