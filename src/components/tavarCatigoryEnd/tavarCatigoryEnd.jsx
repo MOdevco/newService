@@ -42,7 +42,7 @@ function TavarCatigoryEnd({ handleValCheck, setCheckVal,  setTabsId,handleChange
       })
     }
   }
-  console.log(checkedVal);
+  
 
 
  
@@ -93,7 +93,7 @@ function TavarCatigoryEnd({ handleValCheck, setCheckVal,  setTabsId,handleChange
                   setQ(item.productCategoryTypes)
                   console.log(item.id);
                 }
-                } value={item.id} onChange={setTabsId(item.id)} >{item.name}</Tab>
+                }value={item.id} onChange={setTabsId(item.id)}>{item.name}</Tab>
               </Box>
             ))}
 
