@@ -259,7 +259,7 @@ const PropsTable = ({ apiGet, apiPost, title, apiPostDoc }) => {
                   _active={"none"}
                   bg={"#404E67"}
                   borderRadius={"3px"}
-                  w={'120px'}
+                  w={'12px'}
                 >
                   Exel
                 </Button>
