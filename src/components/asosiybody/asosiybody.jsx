@@ -147,7 +147,7 @@ const Asosiybody = () => {
 
           </TabPanel>
           <TabPanel maxWidth={"1832px"} m={"auto"}>
-            <TavarCatigoryEnd  setTabsId={setTabsId} handleValCheck={handleValCheck} data1={data1}/>
+            <TavarCatigoryEnd  setTabsId={setTabsId} handleValCheck={handleValCheck}/>
           </TabPanel>
           <TabPanel maxWidth={"1832px"} m={"auto"}>
             {/* SOTUV TURLARI */}
