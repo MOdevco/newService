@@ -7,7 +7,7 @@ import PropsTable from "../propsTAble/propsTable";
 import { API } from "../../api";
 import axios from "axios";
 import { useToast } from '@chakra-ui/react'
-import { json } from "react-router-dom";
+
 
 const Asosiybody = () => {
   const toast = useToast()
@@ -15,7 +15,6 @@ const Asosiybody = () => {
 
   
   const [checkVal, setCheckVal] = useState([])
-  console.log(tabsId);
   const handleValCheck = () => {
     axios.post(`${API}api/category/attach`, {
       "categoryId": tabsId,
