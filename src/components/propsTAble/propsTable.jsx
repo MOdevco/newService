@@ -202,7 +202,7 @@ const PropsTable = ({ apiGet, apiPost, title, apiPostDoc }) => {
           <Box>
             <Box pb={"25px"} display={"flex"} alignItems={"center"}>
               <Box display={'flex'} border={'1px'} h={'40px'} rounded={'3px'} alignItems={'center'} borderColor={'#B5BDC5'} >
-                <form action="" onSubmit={(e) => {
+                <form onSubmit={(e) => {
                   e.preventDefault()
                   handleSubmit()
                 }}>

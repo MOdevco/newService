@@ -20,7 +20,7 @@ import { MdOutlineMoreVert } from "react-icons/md";
 import axios from 'axios';
 import { API } from '../../api';
 import { AiFillMinusCircle, AiFillPlusCircle } from 'react-icons/ai';
-function TavarCatigoryEnd({ handleValCheck, setCheckVal, setTabsId }) {
+function TavarCatigoryEnd({ handleValCheck, setCheckVal, setTabsId, }) {
   const [data, setData] = useState([])
   const [v, setV] = useState('')
   const [q, setQ] = useState([])
@@ -31,7 +31,6 @@ function TavarCatigoryEnd({ handleValCheck, setCheckVal, setTabsId }) {
   Y = q.map((item, i) => item.id)
 
   const [checkedValues, setValue] = useState([])
-  console.log(checkedValues);
 
   const handleChange = (e) => {
     const { value, checked } = e.target
@@ -44,7 +43,6 @@ function TavarCatigoryEnd({ handleValCheck, setCheckVal, setTabsId }) {
       })
     }
   }
-
 
   const handeId = (e) => {
     const { value, click } = e.target
@@ -97,13 +95,13 @@ function TavarCatigoryEnd({ handleValCheck, setCheckVal, setTabsId }) {
           <TabList>
             {data1.map((item, i) => (
               <Box key={i} >
-                <Tab onClick={function () {
+                <Tab onClick={function() {
                   setV(item.name)
                   setQ(item.productCategoryTypes)
-
+                  console.log(item.id);
                 }
 
-                } value={item.id} onChange={setTabsId(item.id)} >{item.name}</Tab>
+                }>{item.name}</Tab>
               </Box>
             ))}
 

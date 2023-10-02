@@ -18,7 +18,7 @@ const Asosiybody = () => {
 
   const [tabsId, setTabsId] = useState('')
  
-
+console.log(tabsId);
   const [checkVal, setCheckVal] = useState([])
   const handleValCheck = () => {
     axios.post(`${API}api/category/attach`, {
@@ -38,11 +38,9 @@ const Asosiybody = () => {
         isClosable: true,
       })
     }).catch((err) => {
-
+      console.log('hato');
     })
   }
-
-
   // const [data, setData] = useState([])
   // useEffect(() => {
   //   axios
