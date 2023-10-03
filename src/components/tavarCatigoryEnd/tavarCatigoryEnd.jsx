@@ -20,8 +20,9 @@ import { MdOutlineMoreVert } from "react-icons/md";
 import axios from 'axios';
 import { API } from '../../api';
 import { AiFillMinusCircle, AiFillPlusCircle } from 'react-icons/ai';
-function TavarCatigoryEnd({ handleValCheck, setCheckVal,  setTabsId,handleChange }) {
+function TavarCatigoryEnd({ handleValCheck, setCheckVal, setTabsId }) {
   const [data, setData] = useState([])
+  const [checkedVal, setValue] = useState([])
   const [v, setV] = useState('')
   const [q, setQ] = useState([])
   let X = []
@@ -29,23 +30,19 @@ function TavarCatigoryEnd({ handleValCheck, setCheckVal,  setTabsId,handleChange
 
   X = data.map((item, i) => item.id)
   Y = q.map((item, i) => item.id)
-  
-  const [checkedVal,setValue] = useState('')
 
-  function handelChange(e) {
-    const {value,checked} = e.target
-    if(checked) {
-      setValue(pre =>[...pre,value])
-    }else{
-      setValue(pre =>{
-        return [...pre.filter(skills => skills === value)]
+  const handleChange = (e) => {
+    const { value, checked } = e.target
+    if (checked) {
+      setCheckVal(pre => [...pre, value])
+    } else {
+      setValue(pre => {
+        return [...pre.filter(skill => skill === value)]
       })
     }
   }
-  
 
 
- 
 
 
   useEffect(() => {
@@ -59,7 +56,7 @@ function TavarCatigoryEnd({ handleValCheck, setCheckVal,  setTabsId,handleChange
       })
       .then((res) => {
         setData(res.data);
-      });
+      });0
   }, []);
 
 
@@ -79,7 +76,6 @@ function TavarCatigoryEnd({ handleValCheck, setCheckVal,  setTabsId,handleChange
       });
   }, []);
 
-
   return (
     <Box>
 
@@ -88,10 +84,10 @@ function TavarCatigoryEnd({ handleValCheck, setCheckVal,  setTabsId,handleChange
           <TabList>
             {data1.map((item, i) => (
               <Box key={i} >
-                <Tab onClick={function () {
+                <Tab onClick={function(e) {
+                  e.preventDefault();
                   setV(item.id)
                   setQ(item.productCategoryTypes)
-                  console.log(item.id);
                 }
                 }value={item.id} onChange={setTabsId(item.id)}>{item.name}</Tab>
               </Box>
@@ -100,21 +96,27 @@ function TavarCatigoryEnd({ handleValCheck, setCheckVal,  setTabsId,handleChange
           </TabList>
           <TabPanels>
             <TabPanel>
-                
+
+            </TabPanel>
+            <TabPanel>
+
             </TabPanel>
             <TabPanel>
 
             </TabPanel>
             <TabPanel>
 
-              <Text></Text>
+            </TabPanel>
+            <TabPanel>
+
             </TabPanel>
           </TabPanels>
         </Tabs>
       </Box>
 
-
-      <TableContainer shadow={"0px 2px 8px 0px rgba(0, 0, 0, 0.12)"}>
+      
+        
+      <TableContainer maxH={'62vh'} overflowY={'scroll'} shadow={"0px 2px 8px 0px rgba(0, 0, 0, 0.12)"}>
         <Table width={"100%"} rounded={"16px"} fontSize={'19px'}>
           <Thead>
             <Tr bg="#F1F3F9" >
@@ -132,7 +134,7 @@ function TavarCatigoryEnd({ handleValCheck, setCheckVal,  setTabsId,handleChange
                 return (
                   <Tr key={i} bg={i % 2 == 1 ? '#F8F9FC' : ''}>
 
-                    <Td w={'0%'}>  <Checkbox size='lg' colorScheme='purple' ></Checkbox></Td>
+                    <Td w={'0%'}><Checkbox type='checkbox' size='lg' colorScheme='purple' isChecked onChange={handleChange} value={item.id} ></Checkbox></Td>
                     <Td w={'50%'}>{item.name}</Td>
                     <Td> {String(item.date).slice(0, 4) +
                       " " +
@@ -148,7 +150,7 @@ function TavarCatigoryEnd({ handleValCheck, setCheckVal,  setTabsId,handleChange
                 return (
                   <Tr key={i} bg={i % 2 == 1 ? '#F8F9FC' : ''}>
 
-                    <Td w={'0%'}>  <Checkbox size='lg' colorScheme='purple' onChange={handelChange} value={item.id}></Checkbox></Td>
+                    <Td w={'0%'}>  <Checkbox size='lg' colorScheme='purple' onChange={handleChange} value={item.id}></Checkbox></Td>
                     <Td w={'50%'}>{item.name}</Td>
                     <Td> {String(item.date).slice(0, 4) +
                       " " +
@@ -167,7 +169,7 @@ function TavarCatigoryEnd({ handleValCheck, setCheckVal,  setTabsId,handleChange
         </Table>
       </TableContainer>
       <Box display={'flex'} alignItems={'flex-end'} mt={'15px'} justifyContent={'flex-end'}>
-      <Button _hover={'none'} _active={'none'} bg={'green.400'} color={'white'} onClick={handleValCheck}>Send</Button>
+        <Button _hover={'none'} _active={'none'} bg={'green.400'} color={'white'} onClick={handleValCheck}>Send</Button>
       </Box>
 
       {X.map(function (l) {
