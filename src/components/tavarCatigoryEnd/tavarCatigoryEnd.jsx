@@ -134,11 +134,7 @@ function TavarCatigoryEnd({ handleValCheck, setCheckVal, setTabsId }) {
                 return (
                   <Tr key={i} bg={i % 2 == 1 ? '#F8F9FC' : ''}>
 
-<<<<<<< HEAD
                     <Td w={'0%'}><Checkbox type='checkbox' size='lg' colorScheme='purple' isChecked onChange={handleChange} value={item.id} ></Checkbox></Td>
-=======
-                    <Td w={'0%'}>  <Checkbox size='lg' isChecked colorScheme=  'purple' onChange={handleChange} value={item.id} ></Checkbox></Td>
->>>>>>> f4e29c8c0191d24e78e8ed4d8658ed439d22b92c
                     <Td w={'50%'}>{item.name}</Td>
                     <Td> {String(item.date).slice(0, 4) +
                       " " +
