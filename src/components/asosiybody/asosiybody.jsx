@@ -11,9 +11,8 @@ import { useToast } from '@chakra-ui/react'
 
 const Asosiybody = () => {
   const toast = useToast()
-  const [tabsId,setTabsId] = useState([])
+  const [tabsId,setTabsId] = useState('')
   const [checkVal, setCheckVal] = useState([])
-  console.log(tabsId);
   const handleValCheck = () => {
     axios.post(`${API}api/category/attach`, {
       "categoryId": tabsId,
@@ -129,7 +128,7 @@ const Asosiybody = () => {
 
           </TabPanel>
           <TabPanel maxWidth={"1832px"} m={"auto"}>
-            <TavarCatigoryEnd  setTabsId={setTabsId} handleValCheck={handleValCheck}/>
+            <TavarCatigoryEnd  setTabsId={setTabsId} setCheckVal={setCheckVal} handleValCheck={handleValCheck}/>
           </TabPanel>
           <TabPanel maxWidth={"1832px"} m={"auto"}>
             {/* SOTUV TURLARI */}
