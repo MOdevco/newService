@@ -25,6 +25,7 @@ function TavarCatigoryEnd({ handleValCheck, setCheckVal, setTabsId }) {
   const [checkedVal, setValue] = useState([])
   const [v, setV] = useState('')
   const [q, setQ] = useState([])
+  
   console.log(v);
   let X = []
   let Y = []
@@ -39,7 +40,7 @@ function TavarCatigoryEnd({ handleValCheck, setCheckVal, setTabsId }) {
     if (checked) {
       setCheckVal(pre => [...pre, value])
     } else {
-      setValue(pre => {
+      setCheckVal(pre => {
         return [...pre.filter(skill => skill === value)]
       })
     }
