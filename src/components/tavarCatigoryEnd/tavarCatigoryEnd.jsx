@@ -48,7 +48,6 @@ function TavarCatigoryEnd({ handleValCheck, setCheckVal, setTabsId }) {
 
 
 
-
   useEffect(() => {
     axios
       .get(`${API}api/category-types`, {
@@ -133,13 +132,13 @@ function TavarCatigoryEnd({ handleValCheck, setCheckVal, setTabsId }) {
                 return (
                   <Tr key={i} bg={i % 2 == 1 ? '#F8F9FC' : ''}>
 
-                    <Td w={'0%'}>  <Checkbox size='lg' colorScheme='purple' onChange={handleChange} value={item.id} ></Checkbox></Td>
+                    <Td w={'0%'}>  <Checkbox size='lg' isChecked colorScheme=  'purple' onChange={handleChange} value={item.id} ></Checkbox></Td>
                     <Td w={'50%'}>{item.name}</Td>
                     <Td> {String(item.date).slice(0, 4) +
                       " " +
                       `${name}` +
                       " " +
-                      String(item.date).slice(8, 10) +
+                      String(item.date).slice(7, 10) +
                       " " +
                       String(item.date).slice(11, 16)}</Td>
                     <Td>Komiljon Soliyev Xaydarovich</Td>
@@ -149,7 +148,7 @@ function TavarCatigoryEnd({ handleValCheck, setCheckVal, setTabsId }) {
                 return (
                   <Tr key={i} bg={i % 2 == 1 ? '#F8F9FC' : ''}>
 
-                    <Td w={'0%'}>  <Checkbox size='lg' colorScheme='purple' onChange={handleChange} value={item.id}></Checkbox></Td>
+                    <Td w={'0%'}>  <Checkbox size='lg'  colorScheme='purple' onChange={handleChange} value={item.id}></Checkbox></Td>
                     <Td w={'50%'}>{item.name}</Td>
                     <Td> {String(item.date).slice(0, 4) +
                       " " +
