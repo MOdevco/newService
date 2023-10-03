@@ -7,7 +7,7 @@ import PropsTable from "../propsTAble/propsTable";
 import { API } from "../../api";
 import axios from "axios";
 import { useToast } from '@chakra-ui/react'
-import { json } from "react-router-dom";
+
 
 const Asosiybody = () => {
   const toast = useToast()
@@ -18,7 +18,7 @@ const Asosiybody = () => {
       "categoryId": tabsId,
       "productCategoryTypes": checkVal
     } ,{
-      headers: {
+        headers: {
         Authorization: `Bearer ${localStorage.getItem("token")}`
       }
     })
@@ -31,26 +31,10 @@ const Asosiybody = () => {
         isClosable: true,
       })
     }).catch((err) => {
-
+      console.log(err + 'hato');
     })
   }
 
-
-  // const [data, setData] = useState([])
-  // useEffect(() => {
-  //   axios
-  //     .get(`${API}api/category`, {
-  //       headers: {
-  //         // "ngrok-skip-browser-warning": true,
-  //         // "Access-Control-Allow-Origin": "*",
-  //         Authorization: `Bearer ${localStorage.getItem("token")}`,
-  //       },
-  //     })
-  //     .then((res) => {
-  //       setData(res.data);
-  //       setDa(res.data)
-  //     });
-  // }, []);
 
   return (
     <Box p={'40px'} pt={'0px'} height={'100%'} width={'100%'}>
