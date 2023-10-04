@@ -35,6 +35,8 @@ function TavarCatigoryEnd({ handleValCheck, setCheckVal, setTabsId }) {
 
   const handleChange = (e) => {
     const { value, checked } = e.target
+    console.log(checked);
+    console.log(value)
     if (checked) {
       setCheckVal(pre => [...pre, value])
     } else {
@@ -43,6 +45,8 @@ function TavarCatigoryEnd({ handleValCheck, setCheckVal, setTabsId }) {
       })
     }
   }
+
+
 
 
 
@@ -58,8 +62,9 @@ function TavarCatigoryEnd({ handleValCheck, setCheckVal, setTabsId }) {
       })
       .then((res) => {
         setData(res.data);
-      });0
+      });
   }, []);
+  
 
 
 
@@ -136,7 +141,7 @@ function TavarCatigoryEnd({ handleValCheck, setCheckVal, setTabsId }) {
                 return (
                   <Tr key={i} bg={i % 2 == 1 ? '#F8F9FC' : ''}>
 
-                    <Td w={'0%'}><Checkbox type='checkbox' size='lg' colorScheme='purple' isChecked onChange={handleChange} value={item.id} ></Checkbox></Td>
+                    <Td w={'0%'}><Checkbox size='lg' colorScheme='purple' isChecked onChange={handleChange} value={item.id} ></Checkbox></Td>
                     <Td w={'50%'}>{item.name}</Td>
                     <Td> {String(item.date).slice(0, 4) +
                       " " +
