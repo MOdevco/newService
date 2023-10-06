@@ -35,8 +35,6 @@ function TavarCatigoryEnd({ handleValCheck, setCheckVal, setTabsId }) {
 
   const handleChange = (e) => {
     const { value, checked } = e.target
-    console.log(checked);
-    console.log(value)
     if (checked) {
       setCheckVal(pre => [...pre, value])
     } else {
