@@ -8,6 +8,7 @@ import { API } from "../../api";
 import axios from "axios";
 import { useToast } from '@chakra-ui/react'
 import { json } from "react-router-dom";
+import Hodimlar from "../hodimlar/hodimlar";
 
 const Asosiybody = () => {
   const toast = useToast()
@@ -123,6 +124,16 @@ const Asosiybody = () => {
           >
             Lavozimlar
           </Tab>
+
+          <Tab
+            fontSize={"20px"}
+            fontWeight={"500"}
+            lineHeight={"20px"}
+            wordBreak={"break-word"}
+            _selected={{ color: '#FF5C00' }}
+          >
+          Hodimlar
+          </Tab>
         </TabList>
 
         <TabPanels >
@@ -147,7 +158,7 @@ const Asosiybody = () => {
 
           </TabPanel>
           <TabPanel maxWidth={"1832px"} m={"auto"}>
-            <TavarCatigoryEnd  setTabsId={setTabsId} handleValCheck={handleValCheck} data1={data1}/>
+            <TavarCatigoryEnd  setTabsId={setTabsId} handleValCheck={handleValCheck} />
           </TabPanel>
           <TabPanel maxWidth={"1832px"} m={"auto"}>
             {/* SOTUV TURLARI */}
@@ -165,6 +176,12 @@ const Asosiybody = () => {
             {/* LAVOZIMLAR */}
 
           </TabPanel>
+
+
+          <TabPanel maxWidth={"1832px"} m={"auto"}>
+            <Hodimlar />
+          </TabPanel>
+          
 
         </TabPanels>
       </Tabs>
