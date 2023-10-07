@@ -174,6 +174,8 @@ const PropsTable = ({ apiGet, apiPost, title, apiPostDoc }) => {
   }
 
 
+  ` `
+
 
   // slide
 
@@ -207,8 +209,8 @@ const PropsTable = ({ apiGet, apiPost, title, apiPostDoc }) => {
         {open && (
           <Box className="box">
             <Box pb={"25px"} display={"flex"} alignItems={"center"}>
-              <Box display={'flex'} border={'1px'} h={'40px'} rounded={'3px'} alignItems={'center'} borderColor={'#B5BDC5'} >
-                <form onSubmit={(e) => {
+              <Box display={'flex'} border={'1px'} minH={'40px'} rounded={'3px'} justifyContent={'center'} alignItems={'center'} borderColor={'#B5BDC5'} >
+                <form className="form" onSubmit={(e) => {
                   e.preventDefault()
                   handleSubmit()
                 }}>
@@ -243,8 +245,7 @@ const PropsTable = ({ apiGet, apiPost, title, apiPostDoc }) => {
                     }}
                     bg={"#4CAF50"}
                     color={"#fff"}
-                    borderRadius={"3px"}
-                    rounded={'3px'}
+                    rounded={'2px'}
                     _hover={"none"}
                     _active={"none"}
                   >
