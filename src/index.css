@@ -11,8 +11,13 @@ body {
     outline: none;
     padding-left: 20px;
     border: 1px solid red;
-    height: 40px;
+    height: 40px ;
     box-shadow: 0px 0px 4px red;
+}
+.form{
+    display: flex;
+    align-items: center;
+    
 }
 
 .sucPre {
@@ -55,4 +60,9 @@ p {
 .inp2 {
     position: sticky;
     top: 160px;
+}
+.divv{
+    width: 40px;
+    height: 40px;
+    background: red;
 }

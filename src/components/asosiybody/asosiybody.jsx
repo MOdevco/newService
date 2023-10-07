@@ -7,22 +7,23 @@ import PropsTable from "../propsTAble/propsTable";
 import { API } from "../../api";
 import axios from "axios";
 import { useToast } from '@chakra-ui/react'
+<<<<<<< HEAD
 import { json } from "react-router-dom";
 import Hodimlar from "../hodimlar/hodimlar";
+=======
+
+>>>>>>> 0a9790b0dd11b8a921d3583375b1e42a5eb319a7
 
 const Asosiybody = () => {
   const toast = useToast()
-  const [tabsId,setTabsId] = useState([])
-
-  
+  const [tabsId,setTabsId] = useState('')
   const [checkVal, setCheckVal] = useState([])
-  console.log(tabsId);
   const handleValCheck = () => {
     axios.post(`${API}api/category/attach`, {
       "categoryId": tabsId,
       "productCategoryTypes": checkVal
     } ,{
-      headers: {
+        headers: {
         Authorization: `Bearer ${localStorage.getItem("token")}`
       }
     })
@@ -35,26 +36,10 @@ const Asosiybody = () => {
         isClosable: true,
       })
     }).catch((err) => {
-
+      console.log(err + 'hato');
     })
   }
 
-
-  // const [data, setData] = useState([])
-  // useEffect(() => {
-  //   axios
-  //     .get(`${API}api/category`, {
-  //       headers: {
-  //         // "ngrok-skip-browser-warning": true,
-  //         // "Access-Control-Allow-Origin": "*",
-  //         Authorization: `Bearer ${localStorage.getItem("token")}`,
-  //       },
-  //     })
-  //     .then((res) => {
-  //       setData(res.data);
-  //       setDa(res.data)
-  //     });
-  // }, []);
 
   return (
     <Box p={'40px'} pt={'0px'} height={'100%'} width={'100%'}>

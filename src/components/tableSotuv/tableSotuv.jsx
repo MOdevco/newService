@@ -14,7 +14,7 @@ import {
   import {MdOutlineMoreVert} from 'react-icons/md'
 import axios from "axios";
 import { API } from "../../api";
-import TavartableStart from "../tavartableStart/tavartableStart";
+import TavartableStart from "../tavartableStart/TavartableStart";
 function TableSotuv() {
   const monthNames = [
     "January",

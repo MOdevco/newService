@@ -172,8 +172,16 @@ const PropsTable = ({ apiGet, apiPost, title, apiPostDoc }) => {
         })
       });
   }
+
+
+  ` `
+
+
+  // slide
+
   return (
     <Box pt={'-10px'} height={'73vh'} overflow={'auto'}>
+
         <Box position={'sticky'} top={0} zIndex={2} bg={'#F6F7FB'}>
           <Box>
           <Box display={"Flex"} mb={'10px'} alignItems={"center"} justifyContent={'space-between'} gap="10px" >
@@ -188,9 +196,9 @@ const PropsTable = ({ apiGet, apiPost, title, apiPostDoc }) => {
                 onClick={handleClick}
               >
                 {open ? (
-                  <AiFillMinusCircle color="#B10202" />
+                  <AiFillMinusCircle id="btn2" color="#B10202" />
                 ) : (
-                  <AiFillPlusCircle color="#4CAF50" />
+                  <AiFillPlusCircle id="btn1" color="#4CAF50" />
                 )}
 
               </Button>
@@ -199,10 +207,10 @@ const PropsTable = ({ apiGet, apiPost, title, apiPostDoc }) => {
 
         </Box>
         {open && (
-          <Box>
+          <Box className="box">
             <Box pb={"25px"} display={"flex"} alignItems={"center"}>
-              <Box display={'flex'} border={'1px'} h={'40px'} rounded={'3px'} alignItems={'center'} borderColor={'#B5BDC5'} >
-                <form action="" onSubmit={(e) => {
+              <Box display={'flex'} border={'1px'} minH={'40px'} rounded={'3px'} justifyContent={'center'} alignItems={'center'} borderColor={'#B5BDC5'} >
+                <form className="form" onSubmit={(e) => {
                   e.preventDefault()
                   handleSubmit()
                 }}>
@@ -237,8 +245,7 @@ const PropsTable = ({ apiGet, apiPost, title, apiPostDoc }) => {
                     }}
                     bg={"#4CAF50"}
                     color={"#fff"}
-                    borderRadius={"3px"}
-                    rounded={'3px'}
+                    rounded={'2px'}
                     _hover={"none"}
                     _active={"none"}
                   >
@@ -259,6 +266,7 @@ const PropsTable = ({ apiGet, apiPost, title, apiPostDoc }) => {
                   _active={"none"}
                   bg={"#404E67"}
                   borderRadius={"3px"}
+                  w={'120px'}
                 >
                   Exel
                 </Button>

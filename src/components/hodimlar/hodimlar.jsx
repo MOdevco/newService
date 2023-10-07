@@ -40,77 +40,82 @@ const Hodimlar = () => {
     ];
     const d = new Date();
     let name = monthNames[d.getMonth()];
-    const [data1, setData1] = useState([]);
     const [open, setopen] = useState(false);
     const handleClick = () => setopen(!open);
     const [data, setData] = useState([])
-    const [dataVal, setDataVal] = useState({ address: '', email: '', name: '', tel: '', web: "" })
+    const [dataVal, setDataVal] = useState({ ismi: '', familiyasi: '', sharfi: '', passport: '', tel1: "", tel2: "", lavozimi: "", start: "", end: "", username: "", pass: "" })
     const toast = useToast()
    
-    // useEffect(() => {
-    //     axios
-    //         .get(`${API}api/firm`, {
-    //             headers: {
-    //                 // "ngrok-skip-browser-warning": true,
-    //                 // "Access-Control-Allow-Origin": "*",
-    //                 Authorization: `Bearer ${localStorage.getItem("token")}`,
-    //             },
-    //         })
-    //         .then((res) => {
-    //             setData(res.data);
-    //         });
-    // }, []);
+    useEffect(() => {
+        axios
+            .get(`${API}api/employee`, {
+                headers: {
+                    // "ngrok-skip-browser-warning": true,
+                    // "Access-Control-Allow-Origin": "*",
+                    Authorization: `Bearer ${localStorage.getItem("token")}`,
+                },
+            })
+            .then((res) => {
+                setData(res.data);
+            });
+    }, []);
 
-    // const handleSubmit = () => {
-    //     axios
-    //         .post(`${API}api/firm/new`, {
-    //             "name": dataVal.name,
-    //             "address": dataVal.address,
-    //             "email": dataVal.email,
-    //             "tel": dataVal.tel,
-    //             "web": dataVal.web
-    //         }, {
-    //             headers: {
-    //                 // "ngrok-skip-browser-warning": true,
-    //                 // "Access-Control-Allow-Origin": "*",
-    //                 Authorization: `Bearer ${localStorage.getItem("token")}`,
-    //             },
+    const handleSubmit = () => {
+        axios
+            .post(`${API}api/employee/new`, {
+                "firstname": dataVal.ismi,
+                "lastname": dataVal.familiyasi,
+                "middlename": dataVal.sharfi,
+                "passport": dataVal.passport,
+                "tel1": dataVal.tel1,
+                "tel2": dataVal.tel2,
+                "lavozim": dataVal.lavozimi,
+                "startDate": dataVal.start,
+                "endDate": dataVal.end,
+                "username": dataVal.username,
+                "password": dataVal.pass,
+            }, {
+                headers: {
+                    // "ngrok-skip-browser-warning": true,
+                    // "Access-Control-Allow-Origin": "*",
+                    Authorization: `Bearer ${localStorage.getItem("token")}`,
+                },
 
-    //         })
-    //         .then((res) => {
-    //             setDataVal({ address: '', email: '', name: '', tel: '', web: "" })
-    //             console.log(res.data);
-    //             toast({
-    //                 description: `Malumot saqlandi`,
-    //                 status: 'success',
-    //                 position: 'top-right',
-    //                 duration: 2000,
-    //                 isClosable: true,
-    //             })
-    //             axios
-    //                 .get(`${API}api/firm`, {
-    //                     headers: {
-    //                         // "ngrok-skip-browser-warning": true,
-    //                         // "Access-Control-Allow-Origin": "*",
-    //                         Authorization: `Bearer ${localStorage.getItem("token")}`,
-    //                     },
-    //                 })
-    //                 .then((res) => {
-    //                     setData(res.data);
-    //                 });
-    //         })
-    //         .catch((err) => {
-    //             toast({
-    //                 description: `${err.response.data.message}`,
-    //                 status: 'error',
-    //                 position: 'top-right',
-    //                 duration: 2000,
-    //                 isClosable: true,
-    //             })
-    //         });
-    // }
+            })
+            .then((res) => {
+                setDataVal({ ismi: '', familiyasi: '', sharfi: '', passport: '', tel1: "", tel2: "", lavozimi: "", start: "", end: "", username: "", pass: ""  })
+                console.log(res.data);
+                toast({
+                    description: `Malumot saqlandi`,
+                    status: 'success',
+                    position: 'top-right',
+                    duration: 2000,
+                    isClosable: true,
+                })
+                axios
+                    .get(`${API}api/employee`, {
+                        headers: {
+                            // "ngrok-skip-browser-warning": true,
+                            // "Access-Control-Allow-Origin": "*",
+                            Authorization: `Bearer ${localStorage.getItem("token")}`,
+                        },
+                    })
+                    .then((res) => {
+                        setData(res.data);
+                    });
+            })
+            .catch((err) => {
+                toast({
+                    description: `${err.response.data.message}`,
+                    status: 'error',
+                    position: 'top-right',
+                    duration: 2000,
+                    isClosable: true,
+                })
+            });
+    }
 
-
+console.log(data);
     return (
         <Box>
             <Box>
@@ -137,63 +142,64 @@ const Hodimlar = () => {
                                 <Box display={'flex'} gap={'10px'}>
                                     <FormControl isRequired>
                                         <FormLabel>Ismi</FormLabel>
-                                        <Input width={'300px'}  placeholder='Ismi..' />
+                                        <Input onChange={(e) => setDataVal({ ...dataVal, ismi: e.target.value })} value={dataVal.ismi} width={'300px'}  placeholder='Ismi..' />
                                     </FormControl>
 
                                     <FormControl isRequired>
                                         <FormLabel>Familiyasi</FormLabel>
-                                        <Input width={'300px'} placeholder='Familiyasi..' />
+                                        <Input onChange={(e) => setDataVal({ ...dataVal, familiyasi: e.target.value })} value={dataVal.familiyasi} width={'300px'} placeholder='Familiyasi..' />
                                     </FormControl>
 
                                     <FormControl isRequired>
                                         <FormLabel>Sharfi</FormLabel>
-                                        <Input width={'300px'} type='number' placeholder='Sharfi..' />
+                                        <Input onChange={(e) => setDataVal({ ...dataVal, sharfi: e.target.value })} value={dataVal.sharfi} width={'300px'} type='text' placeholder='Sharfi..' />
                                     </FormControl>
 
                                     <FormControl isRequired>
                                         <FormLabel>Passport</FormLabel>
-                                        <Input width={'300px'}  placeholder='Passport..' />
+                                        <Input onChange={(e) => setDataVal({ ...dataVal, passport: e.target.value })} value={dataVal.passport} width={'300px'}  placeholder='Passport..' />
                                     </FormControl>
 
                                     <FormControl isRequired>
                                         <FormLabel>Asosiy telefon</FormLabel>
-                                        <Input width={'300px'}  placeholder='Asosiy telefon..' />
+                                        <Input onChange={(e) => setDataVal({ ...dataVal, tel1: e.target.value })} value={dataVal.tel1} width={'300px'}  placeholder='Asosiy telefon..' />
                                     </FormControl>
                                 </Box>
 
                                 <Box  display={'flex'}gap={'10px'}>
                                     <FormControl isRequired>
                                         <FormLabel>Qo’shimcha telefon</FormLabel>
-                                        <Input width={'300px'}  placeholder='Qo’shimcha telefon..' />
+                                        <Input onChange={(e) => setDataVal({ ...dataVal, tel2: e.target.value })} value={dataVal.tel2} width={'300px'}  placeholder='Qo’shimcha telefon..' />
                                     </FormControl>
 
                                     <FormControl isRequired>
-                                        <FormLabel>QLavozimi</FormLabel>
-                                        <Input width={'300px'}  placeholder='Lavozimi..' />
+                                        <FormLabel>Lavozimi</FormLabel>
+                                        <Input onChange={(e) => setDataVal({ ...dataVal, lavozimi: e.target.value })} value={dataVal.lavozimi} width={'300px'}  placeholder='Lavozimi..' />
                                     </FormControl>
 
                                     <FormControl isRequired>
                                         <FormLabel>Ish boshlash sanasi</FormLabel>
-                                        <Input width={'300px'}  placeholder='Ish boshlash sanasi..' />
+                                        <Input onChange={(e) => setDataVal({ ...dataVal, start: e.target.value })} value={dataVal.start} width={'300px'}  placeholder='Ish boshlash sanasi..' />
                                     </FormControl>
 
                                     <FormControl isRequired>
                                         <FormLabel>Ish yakunlash sanasi</FormLabel>
-                                        <Input width={'300px'}  placeholder='Ish yakunlash sanasi..' />
+                                        <Input onChange={(e) => setDataVal({ ...dataVal, end: e.target.value })} value={dataVal.end} width={'300px'}  placeholder='Ish yakunlash sanasi..' />
                                     </FormControl>
                                 </Box>
 
                                 <Box display={'flex'}>
                                     <FormControl isRequired>
                                         <FormLabel>Username</FormLabel>
-                                        <Input width={'300px'}  placeholder='Username..' />
+                                        <Input onChange={(e) => setDataVal({ ...dataVal, username: e.target.value })} value={dataVal.username} width={'300px'}  placeholder='Username..' />
                                     </FormControl>
 
                                     <FormControl isRequired>
                                         <FormLabel>Password</FormLabel>
-                                        <Input width={'300px'}  placeholder='Password..' />
+                                        <Input onChange={(e) => setDataVal({ ...dataVal, pass: e.target.value })} value={dataVal.pass} width={'300px'}  placeholder='Password..' />
                                     </FormControl>
                                     <Button
+                                    onClick={handleSubmit}
                                         mt={'30px'}
                                         bg={"#4CAF50"}
                                         color={"#fff"}
@@ -215,7 +221,7 @@ const Hodimlar = () => {
 
 
                 </Box>
-                
+
             </Box>
 
             <TableContainer shadow={"0px 2px 8px 0px rgba(0, 0, 0, 0.12)"} mt={'20px'}>
@@ -241,11 +247,17 @@ const Hodimlar = () => {
                         {data.map((item, i) => (
                             <Tr key={i} bg={i % 2 == 1 ? '#F8F9FC' : ''}>
                                 <Td>{i + 1}</Td>
-                                <Td width={'15px%'}>{item.name}</Td>
-                                <Td>{item.address}</Td>
-                                <Td>{item.tel}</Td>
-                                <Td>{item.email}</Td>
-                                <Td>{item.web}</Td>
+                                <Td>{item.ismi}</Td>
+                                <Td>{item.familiyasi}</Td>
+                                <Td>{item.sharfi}</Td>
+                                <Td>{item.passport}</Td>
+                                <Td>{item.tel1}</Td>
+                                <Td>{item.tel2}</Td>
+                                <Td>{item.lavozimi}</Td>
+                                <Td>{item.start}</Td>
+                                <Td>{item.end}</Td>
+                                <Td>{item.username}</Td>
+                                <Td>{item.pass}</Td>
                                 <Td> {String(item.date).slice(0, 4) +
                                     " " +
                                     `${name}` +
