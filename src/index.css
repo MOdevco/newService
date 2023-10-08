@@ -66,3 +66,14 @@ p {
     height: 40px;
     background: red;
 }
+
+
+.select{
+    width: 300px;
+    height: 40px;
+    border: 1px solid rgb(241, 238, 238);
+    border-radius: 6px;
+    outline: none;
+    background: transparent;
+    padding-left: 15px;
+}

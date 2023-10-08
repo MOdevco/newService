@@ -12,6 +12,8 @@ import {
     Input,
     Box,
     Text,
+    Select,
+    Stack,
 } from "@chakra-ui/react";
 import {
     FormControl,
@@ -43,9 +45,10 @@ const Hodimlar = () => {
     const [open, setopen] = useState(false);
     const handleClick = () => setopen(!open);
     const [data, setData] = useState([])
-    const [dataVal, setDataVal] = useState({ ismi: '', familiyasi: '', sharfi: '', passport: '', tel1: "", tel2: "", lavozimi: "", start: "", end: "", username: "", pass: "" })
+    const [option, setOption] = useState([])
+    const [dataVal, setDataVal] = useState({ ismi: '', familiyasi: '', sharfi: '', passport: '', tel1: "", tel2: "", lavozimi: "", start: "", end: "", username: "", pass: "", birthday: "" })
     const toast = useToast()
-   
+    console.log(data);
     useEffect(() => {
         axios
             .get(`${API}api/employee`, {
@@ -63,17 +66,24 @@ const Hodimlar = () => {
     const handleSubmit = () => {
         axios
             .post(`${API}api/employee/new`, {
-                "firstname": dataVal.ismi,
-                "lastname": dataVal.familiyasi,
-                "middlename": dataVal.sharfi,
-                "passport": dataVal.passport,
-                "tel1": dataVal.tel1,
-                "tel2": dataVal.tel2,
-                "lavozim": dataVal.lavozimi,
-                "startDate": dataVal.start,
+                "auth": {
+                    "password": dataVal.pass,
+                    "username": dataVal.username,
+                },
                 "endDate": dataVal.end,
-                "username": dataVal.username,
-                "password": dataVal.pass,
+                "face": {
+                    "birthday": dataVal.birthday, 
+                    "firstname": dataVal.ismi,
+                    "lastname": dataVal.familiyasi,
+                    "middlename": dataVal.sharfi,
+                    "passport": dataVal.passport,
+                    "tel1": dataVal.tel1,
+                    "tel2": dataVal.tel2,
+                },
+                "startDate": dataVal.start,
+                "stuff": {
+                    "name": dataVal.lavozimi,
+                } ,
             }, {
                 headers: {
                     // "ngrok-skip-browser-warning": true,
@@ -83,8 +93,7 @@ const Hodimlar = () => {
 
             })
             .then((res) => {
-                setDataVal({ ismi: '', familiyasi: '', sharfi: '', passport: '', tel1: "", tel2: "", lavozimi: "", start: "", end: "", username: "", pass: ""  })
-                console.log(res.data);
+                setDataVal({ ismi: '', familiyasi: '', sharfi: '', passport: '', tel1: "", tel2: "", lavozimi: "", start: "", end: "", username: "", pass: "", birthday: ""  })
                 toast({
                     description: `Malumot saqlandi`,
                     status: 'success',
@@ -115,7 +124,18 @@ const Hodimlar = () => {
             });
     }
 
-console.log(data);
+
+    useEffect(() => {
+        axios.get(`${API}api/stuff`, {
+            headers: {
+                Authorization:`Bearer ${localStorage.getItem('token')}`
+            },
+        })
+        .then((res) => {
+            setOption(res.data)
+        })
+        
+    }, [])
     return (
         <Box>
             <Box>
@@ -147,17 +167,17 @@ console.log(data);
 
                                     <FormControl isRequired>
                                         <FormLabel>Familiyasi</FormLabel>
-                                        <Input onChange={(e) => setDataVal({ ...dataVal, familiyasi: e.target.value })} value={dataVal.familiyasi} width={'300px'} placeholder='Familiyasi..' />
+                                        <Input required onChange={(e) => setDataVal({ ...dataVal, familiyasi: e.target.value })} value={dataVal.familiyasi} width={'300px'} placeholder='Familiyasi..' />
                                     </FormControl>
 
                                     <FormControl isRequired>
                                         <FormLabel>Sharfi</FormLabel>
-                                        <Input onChange={(e) => setDataVal({ ...dataVal, sharfi: e.target.value })} value={dataVal.sharfi} width={'300px'} type='text' placeholder='Sharfi..' />
+                                        <Input required onChange={(e) => setDataVal({ ...dataVal, sharfi: e.target.value })} value={dataVal.sharfi} width={'300px'} type='text' placeholder='Sharfi..' />
                                     </FormControl>
 
                                     <FormControl isRequired>
                                         <FormLabel>Passport</FormLabel>
-                                        <Input onChange={(e) => setDataVal({ ...dataVal, passport: e.target.value })} value={dataVal.passport} width={'300px'}  placeholder='Passport..' />
+                                        <Input required onChange={(e) => setDataVal({ ...dataVal, passport: e.target.value })} value={dataVal.passport} width={'300px'}  placeholder='Passport..' />
                                     </FormControl>
 
                                     <FormControl isRequired>
@@ -174,7 +194,11 @@ console.log(data);
 
                                     <FormControl isRequired>
                                         <FormLabel>Lavozimi</FormLabel>
-                                        <Input onChange={(e) => setDataVal({ ...dataVal, lavozimi: e.target.value })} value={dataVal.lavozimi} width={'300px'}  placeholder='Lavozimi..' />
+                                        <select className='select' placeholder='Lavozim'>
+                                            {option.map(item =>(
+                                                <option key={item.id} value={item.id}>{item.name}</option>
+                                            ))}
+                                        </select>
                                     </FormControl>
 
                                     <FormControl isRequired>
@@ -185,6 +209,10 @@ console.log(data);
                                     <FormControl isRequired>
                                         <FormLabel>Ish yakunlash sanasi</FormLabel>
                                         <Input onChange={(e) => setDataVal({ ...dataVal, end: e.target.value })} value={dataVal.end} width={'300px'}  placeholder='Ish yakunlash sanasi..' />
+                                    </FormControl>
+                                    <FormControl isRequired>
+                                        <FormLabel>Tug'ilgan sanasi</FormLabel>
+                                        <Input onChange={(e) => setDataVal({ ...dataVal, birthday: e.target.value })} value={dataVal.birthday} width={'300px'} type='date' placeholder='Tugilgan sanasi' />
                                     </FormControl>
                                 </Box>
 
@@ -229,7 +257,7 @@ console.log(data);
                     <Thead>
                         <Tr bg="#F1F3F9" >
                             <Th  fontWeight={'bold'} color={'#1D2433'} textTransform={'capitalize'} fontSize={'15px'}>№</Th>
-                            <Th  fontWeight={'bold'} color={'#1D2433'} textTransform={'capitalize'} fontSize={'15px'}> Ismi</Th>
+                            <Th  fontWeight={'bold'} color={'#1D2433'} textTransform={'capitalize'} fontSize={'15px'}>Ismi</Th>
                             <Th  fontWeight={'bold'} color={'#1D2433'} textTransform={'capitalize'} fontSize={'15px'}>Familiyasi</Th>
                             <Th  fontWeight={'bold'} color={'#1D2433'} textTransform={'capitalize'} fontSize={'15px'}>Sharfi</Th>
                             <Th  fontWeight={'bold'} color={'#1D2433'} textTransform={'capitalize'} fontSize={'15px'}>Passport</Th>
@@ -241,31 +269,25 @@ console.log(data);
                             <Th  fontWeight={'bold'} color={'#1D2433'} textTransform={'capitalize'} fontSize={'15px'}>Username</Th>
                             <Th  fontWeight={'bold'} color={'#1D2433'} textTransform={'capitalize'} fontSize={'15px'}>Password</Th>
                             <Th></Th>
+                            <Th></Th>
                         </Tr>
                     </Thead>
                     <Tbody>
                         {data.map((item, i) => (
                             <Tr key={i} bg={i % 2 == 1 ? '#F8F9FC' : ''}>
                                 <Td>{i + 1}</Td>
-                                <Td>{item.ismi}</Td>
-                                <Td>{item.familiyasi}</Td>
-                                <Td>{item.sharfi}</Td>
-                                <Td>{item.passport}</Td>
-                                <Td>{item.tel1}</Td>
-                                <Td>{item.tel2}</Td>
-                                <Td>{item.lavozimi}</Td>
-                                <Td>{item.start}</Td>
-                                <Td>{item.end}</Td>
+                                <Td>{item.face.firstname}</Td>
+                                <Td>{item.face.lastname}</Td>
+                                <Td>{item.face.middlename}</Td>
+                                <Td>{item.face.passport}</Td>
+                                <Td>{item.face.tel1}</Td>
+                                <Td>{item.face.tel2}</Td>
+                                <Td>{item.stuff.name}</Td>
+                                <Td>{item.startDate}</Td>
+                                <Td>{item.endDate}</Td>
                                 <Td>{item.username}</Td>
                                 <Td>{item.pass}</Td>
-                                <Td> {String(item.date).slice(0, 4) +
-                                    " " +
-                                    `${name}` +
-                                    " " +
-                                    String(item.date).slice(8, 10) +
-                                    " " +
-                                    String(item.date).slice(11, 16)}</Td>
-                                <Td>Muhammadali Anvarov</Td>
+                                <Td></Td>
                                 <Td><MdOutlineMoreVert size={"29px"} /></Td>
                             </Tr>
                         ))}

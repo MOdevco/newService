@@ -7,12 +7,7 @@ import PropsTable from "../propsTAble/propsTable";
 import { API } from "../../api";
 import axios from "axios";
 import { useToast } from '@chakra-ui/react'
-<<<<<<< HEAD
-import { json } from "react-router-dom";
 import Hodimlar from "../hodimlar/hodimlar";
-=======
-
->>>>>>> 0a9790b0dd11b8a921d3583375b1e42a5eb319a7
 
 const Asosiybody = () => {
   const toast = useToast()
