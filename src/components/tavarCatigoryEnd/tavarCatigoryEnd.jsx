@@ -123,7 +123,7 @@ function TavarCatigoryEnd({ handleValCheck, setCheckVal, setTabsId }) {
         
       <TableContainer maxH={'62vh'} overflowY={'scroll'} shadow={"0px 2px 8px 0px rgba(0, 0, 0, 0.12)"}>
         <Table width={"100%"} rounded={"16px"} fontSize={'19px'}>
-          <Thead>
+          <Thead> 
             <Tr bg="#F1F3F9" >
               <Th fontWeight={'bold'} color={'#1D2433'} textTransform={'capitalize'} fontSize={'17px'}>№</Th>
               <Th fontWeight={'bold'} color={'#1D2433'} textTransform={'capitalize'} fontSize={'17px'}> Nomi</Th>
