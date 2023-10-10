@@ -75,21 +75,21 @@ const Hodimlar = () => {
 
 
     let endData = dataVal.endDate
-    let endDay = endData.slice(3, 5)
-    let endMonth = endData.slice(0, 2)
+    let endMonth = endData.slice(3, 5)
+    let endDay = endData.slice(0, 2)
     let endYear = endData.slice(6, 10)
     let startDate = dataVal.startDate
-    let startDay = startDate.slice(3, 5)
-    let startMonth = startDate.slice(0, 2)
+    let startMonth = startDate.slice(3, 5)
+    let startDay = startDate.slice(0, 2)
     let startYear = startDate.slice(6, 10)
     let birthday = dataFace.birthday
-    let day = birthday.slice(3, 5)
-    let month = birthday.slice(0, 2)
+    let month = birthday.slice(3, 5)
+    let day = birthday.slice(0, 2)
     let year = birthday.slice(6, 10)
 
-    let resEnd = `${endMonth}-${endDay}-${endYear}`
-    let resStart = `${startMonth}-${startDay}-${startYear}`
-    let resBirthday = `${month}-${day}-${year}`
+    let resEnd = `${endDay}-${endMonth}-${endYear}`
+    let resStart = `${startDay}-${startMonth}-${startYear}`
+    let resBirthday = `${day}-${month}-${year}`
     console.log(resEnd);
     const handleSubmit = () => {
         axios
