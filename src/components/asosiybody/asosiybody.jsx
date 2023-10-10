@@ -4,10 +4,10 @@ import TavarCatigoryEnd from "../tavarCatigoryEnd/tavarCatigoryEnd";
 import { Box } from "@chakra-ui/react";
 import TovarFirmalar from "../tovarFirmalar/tovarFirmalar";
 import PropsTable from "../propsTAble/propsTable";
-import { API } from "../../api";
 import axios from "axios";
 import { useToast } from '@chakra-ui/react'
 import Hodimlar from "../hodimlar/hodimlar";
+import { API } from "../../api";
 
 const Asosiybody = () => {
   const toast = useToast()
