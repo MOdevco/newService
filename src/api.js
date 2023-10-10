@@ -1,1 +1,1 @@
-export const API = 'http://192.168.1.2:8080/'
+export const API = 'https://02ae-95-214-211-127.ngrok-free.app/'

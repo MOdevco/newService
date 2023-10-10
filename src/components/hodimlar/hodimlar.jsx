@@ -46,6 +46,7 @@ const Hodimlar = () => {
     const handleClick = () => setopen(!open);
     const [data, setData] = useState([])
     const [option, setOption] = useState([])
+    const [op, setOp] = useState([])
     const [dataVal, setDataVal] = useState({ ismi: '', familiyasi: '', sharfi: '', passport: '', tel1: "", tel2: "", lavozimi: "", start: "", end: "", username: "", pass: "", birthday: "" })
     const toast = useToast()
     console.log(data);
@@ -53,8 +54,8 @@ const Hodimlar = () => {
         axios
             .get(`${API}api/employee`, {
                 headers: {
-                    // "ngrok-skip-browser-warning": true,
-                    // "Access-Control-Allow-Origin": "*",
+                    "ngrok-skip-browser-warning": true,
+                    "Access-Control-Allow-Origin": "*",
                     Authorization: `Bearer ${localStorage.getItem("token")}`,
                 },
             })
@@ -86,8 +87,8 @@ const Hodimlar = () => {
                 } ,
             }, {
                 headers: {
-                    // "ngrok-skip-browser-warning": true,
-                    // "Access-Control-Allow-Origin": "*",
+                    "ngrok-skip-browser-warning": true,
+                    "Access-Control-Allow-Origin": "*",
                     Authorization: `Bearer ${localStorage.getItem("token")}`,
                 },
 
@@ -104,8 +105,8 @@ const Hodimlar = () => {
                 axios
                     .get(`${API}api/employee`, {
                         headers: {
-                            // "ngrok-skip-browser-warning": true,
-                            // "Access-Control-Allow-Origin": "*",
+                            "ngrok-skip-browser-warning": true,
+                            "Access-Control-Allow-Origin": "*",
                             Authorization: `Bearer ${localStorage.getItem("token")}`,
                         },
                     })
@@ -136,6 +137,7 @@ const Hodimlar = () => {
         })
         
     }, [])
+
     return (
         <Box>
             <Box>
@@ -194,11 +196,12 @@ const Hodimlar = () => {
 
                                     <FormControl isRequired>
                                         <FormLabel>Lavozimi</FormLabel>
-                                        <select className='select' placeholder='Lavozim'>
+                                        <Select w={'300px'} placeholder='Lavozim'>
                                             {option.map(item =>(
                                                 <option key={item.id} value={item.id}>{item.name}</option>
                                             ))}
-                                        </select>
+                                        </Select>
+                                        
                                     </FormControl>
 
                                     <FormControl isRequired>

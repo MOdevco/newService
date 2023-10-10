@@ -58,8 +58,8 @@ const PropsTable = ({ apiGet, apiPost, title, apiPostDoc }) => {
     axios
       .get(`${API}${apiGet}`, {
         headers: {
-          // "ngrok-skip-browser-warning": true,
-          // "Access-Control-Allow-Origin": "*",
+          "ngrok-skip-browser-warning": true,
+          "Access-Control-Allow-Origin": "*",
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
       })
@@ -74,8 +74,8 @@ const PropsTable = ({ apiGet, apiPost, title, apiPostDoc }) => {
         "name": valueData
       }, {
         headers: {
-          // "ngrok-skip-browser-warning": true,
-          // "Access-Control-Allow-Origin": "*",
+          "ngrok-skip-browser-warning": true,
+          "Access-Control-Allow-Origin": "*",
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
       })
@@ -93,8 +93,8 @@ const PropsTable = ({ apiGet, apiPost, title, apiPostDoc }) => {
           axios
             .get(`${API}${apiGet}`, {
               headers: {
-                // "ngrok-skip-browser-warning": true,
-                // "Access-Control-Allow-Origin": "*",
+                "ngrok-skip-browser-warning": true,
+                "Access-Control-Allow-Origin": "*",
                 Authorization: `Bearer ${localStorage.getItem("token")}`,
               },
             })
@@ -127,8 +127,8 @@ const PropsTable = ({ apiGet, apiPost, title, apiPostDoc }) => {
     axios
       .post(`${API}${apiPostDoc}`, formData, {
         headers: {
-          // "ngrok-skip-browser-warning": true,
-          // "Access-Control-Allow-Origin": "*",
+          "ngrok-skip-browser-warning": true,
+          "Access-Control-Allow-Origin": "*",
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
       })
@@ -151,8 +151,8 @@ const PropsTable = ({ apiGet, apiPost, title, apiPostDoc }) => {
           axios
             .get(`${API}${apiGet}`, {
               headers: {
-                // "ngrok-skip-browser-warning": true,
-                // "Access-Control-Allow-Origin": "*",
+                "ngrok-skip-browser-warning": true,
+                "Access-Control-Allow-Origin": "*",
                 Authorization: `Bearer ${localStorage.getItem("token")}`,
               },
             })
