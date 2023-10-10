@@ -46,15 +46,19 @@ const Hodimlar = () => {
     const handleClick = () => setopen(!open);
     const [data, setData] = useState([])
     const [option, setOption] = useState([])
-    const [dataVal, setDataVal] = useState({ ismi: '', familiyasi: '', sharfi: '', passport: '', tel1: "", tel2: "", lavozimi: "", start: "", end: "", username: "", pass: "", birthday: "" })
+    const [dataVal, setDataVal] = useState({endDate: "", startDate:"", stuffId:"" })
+    const [dataAuth, setDataAuth] = useState({password: "",username: ""})
+    const [dataFace, setDataFace] = useState({birthday: "", firstname: "", lastname: "", middlename: "", passport:"", tel1:"", tel2:""})
     const toast = useToast()
-    console.log(data);
+    console.log(dataVal);
+    console.log(dataFace);
+    console.log(dataAuth);
     useEffect(() => {
         axios
             .get(`${API}api/employee`, {
                 headers: {
-                    // "ngrok-skip-browser-warning": true,
-                    // "Access-Control-Allow-Origin": "*",
+                    "ngrok-skip-browser-warning": true,
+                    "Access-Control-Allow-Origin": "*",
                     Authorization: `Bearer ${localStorage.getItem("token")}`,
                 },
             })
@@ -62,38 +66,59 @@ const Hodimlar = () => {
                 setData(res.data);
             });
     }, []);
+    const [val , setVal] = useState('')
 
+    const date = new Date()
+
+    const hour = date.getHours()
+    const minute = date.getMinutes() < 10 ? '0' : '' + date.getMinutes();
+
+
+    let endData = dataVal.endDate
+    let endDay = endData.slice(3, 5)
+    let endMonth = endData.slice(0, 2)
+    let endYear = endData.slice(6, 10)
+    let startDate = dataVal.startDate
+    let startDay = startDate.slice(3, 5)
+    let startMonth = startDate.slice(0, 2)
+    let startYear = startDate.slice(6, 10)
+    let birthday = dataFace.birthday
+    let day = birthday.slice(3, 5)
+    let month = birthday.slice(0, 2)
+    let year = birthday.slice(6, 10)
+
+    let resEnd = `${endMonth}-${endDay}-${endYear}`
+    let resStart = `${startMonth}-${startDay}-${startYear}`
+    let resBirthday = `${month}-${day}-${year}`
+    console.log(resEnd);
     const handleSubmit = () => {
         axios
             .post(`${API}api/employee/new`, {
                 "auth": {
-                    "password": dataVal.pass,
-                    "username": dataVal.username,
+                    "password": dataAuth.password,
+                    "username": dataAuth.username,
                 },
-                "endDate": dataVal.end,
+                "endDate": `${resEnd} ${hour}:${minute}`,
                 "face": {
-                    "birthday": dataVal.birthday, 
-                    "firstname": dataVal.ismi,
-                    "lastname": dataVal.familiyasi,
-                    "middlename": dataVal.sharfi,
-                    "passport": dataVal.passport,
-                    "tel1": dataVal.tel1,
-                    "tel2": dataVal.tel2,
+                    "birthday": `${resBirthday}`, 
+                    "firstname": dataFace.firstname,
+                    "lastname": dataFace.lastname,
+                    "middlename": dataFace.middlename,
+                    "passport": dataFace.passport,
+                    "tel1": dataFace.tel1,
+                    "tel2": dataFace.tel2,
                 },
-                "startDate": dataVal.start,
-                "stuff": {
-                    "name": dataVal.lavozimi,
-                } ,
+                "startDate": `${resStart} ${hour}:${minute}`,
+                "stuffId": dataVal.stuffId
             }, {
                 headers: {
-                    // "ngrok-skip-browser-warning": true,
-                    // "Access-Control-Allow-Origin": "*",
+                    "ngrok-skip-browser-warning": true,
+                    "Access-Control-Allow-Origin": "*",
                     Authorization: `Bearer ${localStorage.getItem("token")}`,
                 },
-
             })
             .then((res) => {
-                setDataVal({ ismi: '', familiyasi: '', sharfi: '', passport: '', tel1: "", tel2: "", lavozimi: "", start: "", end: "", username: "", pass: "", birthday: ""  })
+                // setDataVal({password: "",username: "", endDate: "",birthday: "", firstname: "", lastname: "", middlename: "", passport:"", tel1:"", tel2:"", startDate:"", stuffId:"" })
                 toast({
                     description: `Malumot saqlandi`,
                     status: 'success',
@@ -104,8 +129,8 @@ const Hodimlar = () => {
                 axios
                     .get(`${API}api/employee`, {
                         headers: {
-                            // "ngrok-skip-browser-warning": true,
-                            // "Access-Control-Allow-Origin": "*",
+                            "ngrok-skip-browser-warning": true,
+                            "Access-Control-Allow-Origin": "*",
                             Authorization: `Bearer ${localStorage.getItem("token")}`,
                         },
                     })
@@ -136,6 +161,7 @@ const Hodimlar = () => {
         })
         
     }, [])
+    console.log(val);
     return (
         <Box>
             <Box>
@@ -162,69 +188,69 @@ const Hodimlar = () => {
                                 <Box display={'flex'} gap={'10px'}>
                                     <FormControl isRequired>
                                         <FormLabel>Ismi</FormLabel>
-                                        <Input onChange={(e) => setDataVal({ ...dataVal, ismi: e.target.value })} value={dataVal.ismi} width={'300px'}  placeholder='Ismi..' />
+                                        <Input onChange={(e) => setDataFace({ ...dataFace , firstname: e.target.value  })} value={dataFace.firstname} width={'300px'}  placeholder='Ismi..' />
                                     </FormControl>
 
                                     <FormControl isRequired>
                                         <FormLabel>Familiyasi</FormLabel>
-                                        <Input required onChange={(e) => setDataVal({ ...dataVal, familiyasi: e.target.value })} value={dataVal.familiyasi} width={'300px'} placeholder='Familiyasi..' />
+                                        <Input required onChange={(e) => setDataFace({ ...dataFace, lastname: e.target.value })} value={dataFace.lastname} width={'300px'} placeholder='Familiyasi..' />
                                     </FormControl>
 
                                     <FormControl isRequired>
                                         <FormLabel>Sharfi</FormLabel>
-                                        <Input required onChange={(e) => setDataVal({ ...dataVal, sharfi: e.target.value })} value={dataVal.sharfi} width={'300px'} type='text' placeholder='Sharfi..' />
+                                        <Input required onChange={(e) => setDataFace({ ...dataFace, middlename: e.target.value })} value={dataFace.middlename} width={'300px'} type='text' placeholder='Sharfi..' />
                                     </FormControl>
 
                                     <FormControl isRequired>
                                         <FormLabel>Passport</FormLabel>
-                                        <Input required onChange={(e) => setDataVal({ ...dataVal, passport: e.target.value })} value={dataVal.passport} width={'300px'}  placeholder='Passport..' />
+                                        <Input required onChange={(e) => setDataFace({ ...dataFace, passport: e.target.value })} value={dataFace.passport} width={'300px'}  placeholder='Passport..' />
                                     </FormControl>
 
                                     <FormControl isRequired>
                                         <FormLabel>Asosiy telefon</FormLabel>
-                                        <Input onChange={(e) => setDataVal({ ...dataVal, tel1: e.target.value })} value={dataVal.tel1} width={'300px'}  placeholder='Asosiy telefon..' />
+                                        <Input onChange={(e) => setDataFace({ ...dataFace , tel1: e.target.value })} value={dataFace.tel1} width={'300px'}  placeholder='Asosiy telefon..' />
                                     </FormControl>
                                 </Box>
 
                                 <Box  display={'flex'}gap={'10px'}>
                                     <FormControl isRequired>
                                         <FormLabel>Qo’shimcha telefon</FormLabel>
-                                        <Input onChange={(e) => setDataVal({ ...dataVal, tel2: e.target.value })} value={dataVal.tel2} width={'300px'}  placeholder='Qo’shimcha telefon..' />
+                                        <Input onChange={(e) => setDataFace({ ...dataFace , tel2: e.target.value })} value={dataFace.tel2} width={'300px'}  placeholder='Qo’shimcha telefon..' />
                                     </FormControl>
 
                                     <FormControl isRequired>
                                         <FormLabel>Lavozimi</FormLabel>
-                                        <select className='select' placeholder='Lavozim'>
-                                            {option.map(item =>(
-                                                <option key={item.id} value={item.id}>{item.name}</option>
+                                        <Select onChange={(e) => setDataVal({...dataVal, stuffId: e.target.value })}  w={'300px'}>
+                                            {option.map((item , i) =>(
+                                                <option key={i} value={item.id}>{item.name}</option>
                                             ))}
-                                        </select>
+                                        </Select>
                                     </FormControl>
 
                                     <FormControl isRequired>
                                         <FormLabel>Ish boshlash sanasi</FormLabel>
-                                        <Input onChange={(e) => setDataVal({ ...dataVal, start: e.target.value })} value={dataVal.start} width={'300px'}  placeholder='Ish boshlash sanasi..' />
+                                        <Input type='text' onChange={(e) => setDataVal({ ...dataVal, startDate: e.target.value })} value={dataVal.startDate} width={'300px'}  placeholder='Ish boshlash sanasi..' />
                                     </FormControl>
 
                                     <FormControl isRequired>
                                         <FormLabel>Ish yakunlash sanasi</FormLabel>
-                                        <Input onChange={(e) => setDataVal({ ...dataVal, end: e.target.value })} value={dataVal.end} width={'300px'}  placeholder='Ish yakunlash sanasi..' />
+                                        <Input type='text' onChange={(e) => setDataVal({ ...dataVal, endDate: e.target.value })} value={dataVal.endDate} width={'300px'}  placeholder='Ish yakunlash sanasi..' />
                                     </FormControl>
                                     <FormControl isRequired>
                                         <FormLabel>Tug'ilgan sanasi</FormLabel>
-                                        <Input onChange={(e) => setDataVal({ ...dataVal, birthday: e.target.value })} value={dataVal.birthday} width={'300px'} type='date' placeholder='Tugilgan sanasi' />
+                                        <Input onChange={(e) => setDataFace({ ...dataFace, birthday: e.target.value })} value={dataFace.birthday} width={'300px'}  placeholder='Tugilgan sanasi' />
                                     </FormControl>
                                 </Box>
 
                                 <Box display={'flex'}>
                                     <FormControl isRequired>
                                         <FormLabel>Username</FormLabel>
-                                        <Input onChange={(e) => setDataVal({ ...dataVal, username: e.target.value })} value={dataVal.username} width={'300px'}  placeholder='Username..' />
+                                        <Input onChange={(e) => setDataAuth({ ...dataAuth , username: e.target.value })} value={dataAuth.username} width={'300px'}  placeholder='Username..' />
                                     </FormControl>
 
                                     <FormControl isRequired>
                                         <FormLabel>Password</FormLabel>
-                                        <Input onChange={(e) => setDataVal({ ...dataVal, pass: e.target.value })} value={dataVal.pass} width={'300px'}  placeholder='Password..' />
+                                        <Input onChange={(e) => setDataAuth({ ...dataAuth , password: e.target.value })} value={dataAuth.password} width={'300px'}  placeholder='Password..' />
                                     </FormControl>
                                     <Button
                                     onClick={handleSubmit}
@@ -286,7 +312,7 @@ const Hodimlar = () => {
                                 <Td>{item.startDate}</Td>
                                 <Td>{item.endDate}</Td>
                                 <Td>{item.username}</Td>
-                                <Td>{item.pass}</Td>
+                                <Td>{item.password}</Td>
                                 <Td></Td>
                                 <Td><MdOutlineMoreVert size={"29px"} /></Td>
                             </Tr>
