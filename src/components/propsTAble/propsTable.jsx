@@ -15,10 +15,10 @@ import {
 } from "@chakra-ui/react";
 import { MdDelete, MdOutlineMoreVert } from 'react-icons/md'
 import axios from "axios";
-import { API } from "../../api";
 import { useToast } from '@chakra-ui/react'
 import { AiFillDelete, AiFillMinusCircle, AiFillPlusCircle, AiOutlineCheckCircle, AiOutlineLeft, AiOutlineRight } from "react-icons/ai";
 import { Search2Icon } from "@chakra-ui/icons";
+import { API } from "../../api";
 
 const PropsTable = ({ apiGet, apiPost, title, apiPostDoc }) => {
   const monthNames = [
@@ -58,8 +58,8 @@ const PropsTable = ({ apiGet, apiPost, title, apiPostDoc }) => {
     axios
       .get(`${API}${apiGet}`, {
         headers: {
-          // "ngrok-skip-browser-warning": true,
-          // "Access-Control-Allow-Origin": "*",
+          "ngrok-skip-browser-warning": true,
+          "Access-Control-Allow-Origin": "*",
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
       })
@@ -74,8 +74,8 @@ const PropsTable = ({ apiGet, apiPost, title, apiPostDoc }) => {
         "name": valueData
       }, {
         headers: {
-          // "ngrok-skip-browser-warning": true,
-          // "Access-Control-Allow-Origin": "*",
+          "ngrok-skip-browser-warning": true,
+          "Access-Control-Allow-Origin": "*",
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
       })
@@ -93,8 +93,8 @@ const PropsTable = ({ apiGet, apiPost, title, apiPostDoc }) => {
           axios
             .get(`${API}${apiGet}`, {
               headers: {
-                // "ngrok-skip-browser-warning": true,
-                // "Access-Control-Allow-Origin": "*",
+                "ngrok-skip-browser-warning": true,
+                "Access-Control-Allow-Origin": "*",
                 Authorization: `Bearer ${localStorage.getItem("token")}`,
               },
             })
@@ -127,8 +127,8 @@ const PropsTable = ({ apiGet, apiPost, title, apiPostDoc }) => {
     axios
       .post(`${API}${apiPostDoc}`, formData, {
         headers: {
-          // "ngrok-skip-browser-warning": true,
-          // "Access-Control-Allow-Origin": "*",
+          "ngrok-skip-browser-warning": true,
+          "Access-Control-Allow-Origin": "*",
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
       })
@@ -151,8 +151,8 @@ const PropsTable = ({ apiGet, apiPost, title, apiPostDoc }) => {
           axios
             .get(`${API}${apiGet}`, {
               headers: {
-                // "ngrok-skip-browser-warning": true,
-                // "Access-Control-Allow-Origin": "*",
+                "ngrok-skip-browser-warning": true,
+                "Access-Control-Allow-Origin": "*",
                 Authorization: `Bearer ${localStorage.getItem("token")}`,
               },
             })
@@ -173,6 +173,8 @@ const PropsTable = ({ apiGet, apiPost, title, apiPostDoc }) => {
       });
   }
 
+
+  ` `
 
 
   // slide
@@ -207,10 +209,10 @@ const PropsTable = ({ apiGet, apiPost, title, apiPostDoc }) => {
         {open && (
           <Box className="box">
             <Box pb={"25px"} display={"flex"} alignItems={"center"}>
-              <Box display={'flex'} border={'1px'} h={'40px'} rounded={'3px'} alignItems={'center'} borderColor={'#B5BDC5'} >
-                <form onSubmit={(e) => {
+              <Box display={'flex'} border={'1px'} minH={'40px'} rounded={'3px'} justifyContent={'center'} alignItems={'center'} borderColor={'#B5BDC5'} >
+                <form className="form" onSubmit={(e) => {
                   e.preventDefault()
-                  handleSubmit()
+                  handleSubmit()     
                 }}>
                   <input id="input" className={validateDate ? "success" : 'sucPre'}
                     onChange={function (e) {
@@ -243,8 +245,7 @@ const PropsTable = ({ apiGet, apiPost, title, apiPostDoc }) => {
                     }}
                     bg={"#4CAF50"}
                     color={"#fff"}
-                    borderRadius={"3px"}
-                    rounded={'3px'}
+                    rounded={'2px'}
                     _hover={"none"}
                     _active={"none"}
                   >

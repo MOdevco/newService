@@ -4,10 +4,10 @@ import TavarCatigoryEnd from "../tavarCatigoryEnd/tavarCatigoryEnd";
 import { Box } from "@chakra-ui/react";
 import TovarFirmalar from "../tovarFirmalar/tovarFirmalar";
 import PropsTable from "../propsTAble/propsTable";
-import { API } from "../../api";
 import axios from "axios";
 import { useToast } from '@chakra-ui/react'
-import { json } from "react-router-dom";
+import Hodimlar from "../hodimlar/hodimlar";
+import { API } from "../../api";
 
 const Asosiybody = () => {
   const toast = useToast()
@@ -121,6 +121,16 @@ const Asosiybody = () => {
           >
             Lavozimlar
           </Tab>
+
+          <Tab
+            fontSize={"20px"}
+            fontWeight={"500"}
+            lineHeight={"20px"}
+            wordBreak={"break-word"}
+            _selected={{ color: '#FF5C00' }}
+          >
+          Hodimlar
+          </Tab>
         </TabList>
 
         <TabPanels >
@@ -145,7 +155,7 @@ const Asosiybody = () => {
 
           </TabPanel>
           <TabPanel maxWidth={"1832px"} m={"auto"}>
-            <TavarCatigoryEnd setCheckVal={setCheckVal} setTabsId={setTabsId} handleValCheck={handleValCheck}/>
+            <TavarCatigoryEnd  setTabsId={setTabsId} handleValCheck={handleValCheck} />
           </TabPanel>
           <TabPanel maxWidth={"1832px"} m={"auto"}>
             {/* SOTUV TURLARI */}
@@ -163,6 +173,12 @@ const Asosiybody = () => {
             {/* LAVOZIMLAR */}
 
           </TabPanel>
+
+
+          <TabPanel maxWidth={"1832px"} m={"auto"}>
+            <Hodimlar />
+          </TabPanel>
+          
 
         </TabPanels>
       </Tabs>

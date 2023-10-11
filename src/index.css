@@ -11,14 +11,20 @@ body {
     outline: none;
     padding-left: 20px;
     border: 1px solid red;
-    height: 40px;
+    height: 40px ;
     box-shadow: 0px 0px 4px red;
+}
+.form{
+    display: flex;
+    align-items: center;
+    
 }
 
 .sucPre {
     background-color: transparent;
     outline: none;
     padding-left: 20px;
+    box-shadow: none;
 }
 
 .validateDateSuccess {
@@ -61,3 +67,15 @@ p {
     height: 40px;
     background: red;
 }
+
+
+.select{
+    width: 300px;
+    height: 40px;
+    border: 1px solid rgb(241, 238, 238);
+    border-radius: 6px;
+    outline: none;
+    background: transparent;
+    padding-left: 15px;
+}
+
