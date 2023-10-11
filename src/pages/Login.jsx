@@ -21,7 +21,7 @@ function Login() {
       .post(`${API}api/auth/login`, {
         "username": data.username.trim(),
         "password": data.password.trim()
-
+        
       })
       .then((res) => {
         if (res.status == 200) {
