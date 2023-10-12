@@ -23,7 +23,6 @@ function TavarCatigoryEnd({ handleValCheck, setCheckVal, setTabsId }) {
   const [checkedVal, setValue] = useState([])
   const [v, setV] = useState('')
   const [q, setQ] = useState([])
-  
   let X = []
   let Y = []
 
@@ -39,6 +38,7 @@ function TavarCatigoryEnd({ handleValCheck, setCheckVal, setTabsId }) {
 
   X = data.map((item, i) => item.id);
   Y = q.map((item, i) => item.id);
+
 
   const handleChange = (e) => {
     const { value, checked } = e.target;
@@ -79,6 +79,7 @@ function TavarCatigoryEnd({ handleValCheck, setCheckVal, setTabsId }) {
         setData1(res.data);
       });
   }, []);
+
 
   return (
     <Box>

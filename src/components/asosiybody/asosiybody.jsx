@@ -11,14 +11,15 @@ import { API } from "../../api";
 
 const Asosiybody = () => {
   const toast = useToast()
-  const [tabsId,setTabsId] = useState('')
+  const [tabsId,setTabsId] = useState([])
   const [checkVal, setCheckVal] = useState([])
+  // console.log(tabsId);
   const handleValCheck = () => {
     axios.post(`${API}api/category/attach`, {
       "categoryId": tabsId,
       "productCategoryTypes": checkVal
     } ,{
-        headers: {
+      headers: {
         Authorization: `Bearer ${localStorage.getItem("token")}`
       }
     })
@@ -31,10 +32,26 @@ const Asosiybody = () => {
         isClosable: true,
       })
     }).catch((err) => {
-      console.log(err + 'hato');
+
     })
   }
 
+
+  // const [data, setData] = useState([])
+  // useEffect(() => {
+  //   axios
+  //     .get(`${API}api/category`, {
+  //       headers: {
+  //         // "ngrok-skip-browser-warning": true,
+  //         // "Access-Control-Allow-Origin": "*",
+  //         Authorization: `Bearer ${localStorage.getItem("token")}`,
+  //       },
+  //     })
+  //     .then((res) => {
+  //       setData(res.data);
+  //       setDa(res.data)
+  //     });
+  // }, []);
 
   return (
     <Box p={'40px'} pt={'0px'} height={'100%'} width={'100%'}>

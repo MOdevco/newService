@@ -212,7 +212,7 @@ const PropsTable = ({ apiGet, apiPost, title, apiPostDoc }) => {
               <Box display={'flex'} border={'1px'} minH={'40px'} rounded={'3px'} justifyContent={'center'} alignItems={'center'} borderColor={'#B5BDC5'} >
                 <form className="form" onSubmit={(e) => {
                   e.preventDefault()
-                  handleSubmit()
+                  handleSubmit()     
                 }}>
                   <input id="input" className={validateDate ? "success" : 'sucPre'}
                     onChange={function (e) {
