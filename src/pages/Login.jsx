@@ -8,7 +8,7 @@ import {
   Toast,
 } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
-import { API } from "../components/api/api";
+import { API } from "../api";
 import axios from "axios";
 import { Navigate, useNavigate } from "react-router-dom";
 

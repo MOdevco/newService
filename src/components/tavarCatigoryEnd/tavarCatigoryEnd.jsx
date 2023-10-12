@@ -13,13 +13,20 @@ import {
   Text,
 } from "@chakra-ui/react";
 import { Tabs, TabList, TabPanels, Tab, TabPanel } from "@chakra-ui/react";
-
-import { Checkbox, CheckboxGroup } from "@chakra-ui/react";
-import { MdOutlineMoreVert } from "react-icons/md";
-// import TavartableStart from '../tavartableStart/tavartableStart';
 import axios from "axios";
-import { API } from "../../api";
-import { AiFillMinusCircle, AiFillPlusCircle } from "react-icons/ai";
+
+
+import { AiFillMinusCircle, AiFillPlusCircle } from 'react-icons/ai';
+import { API } from '../../api';
+function TavarCatigoryEnd({ handleValCheck, setCheckVal, setTabsId }) {
+  const [data, setData] = useState([])
+  const [checkedVal, setValue] = useState([])
+  const [v, setV] = useState('')
+  const [q, setQ] = useState([])
+  
+  let X = []
+  let Y = []
+
 function TavarCatigoryEnd({ handleValCheck, setCheckVal, setTabsId }) {
   const [data, setData] = useState([]);
   const [checkedVal, setValue] = useState([]);
@@ -48,8 +55,8 @@ function TavarCatigoryEnd({ handleValCheck, setCheckVal, setTabsId }) {
     axios
       .get(`${API}api/category-types`, {
         headers: {
-          // "ngrok-skip-browser-warning": true,
-          // "Access-Control-Allow-Origin": "*",
+          "ngrok-skip-browser-warning": true,
+          "Access-Control-Allow-Origin": "*",
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
       })
@@ -63,8 +70,8 @@ function TavarCatigoryEnd({ handleValCheck, setCheckVal, setTabsId }) {
     axios
       .get(`${API}api/category`, {
         headers: {
-          // "ngrok-skip-browser-warning": true,
-          // "Access-Control-Allow-Origin": "*",
+          "ngrok-skip-browser-warning": true,
+          "Access-Control-Allow-Origin": "*",
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
       })
@@ -233,6 +240,6 @@ function TavarCatigoryEnd({ handleValCheck, setCheckVal, setTabsId }) {
       })}
     </Box>
   );
-}
+}}
 
 export default TavarCatigoryEnd;
