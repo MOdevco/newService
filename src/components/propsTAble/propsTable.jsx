@@ -18,7 +18,7 @@ import axios from "axios";
 import { useToast } from '@chakra-ui/react'
 import { AiFillDelete, AiFillMinusCircle, AiFillPlusCircle, AiOutlineCheckCircle, AiOutlineLeft, AiOutlineRight } from "react-icons/ai";
 import { Search2Icon } from "@chakra-ui/icons";
-import { API } from "../../api";
+import { API } from "../api/api";
 
 const PropsTable = ({ apiGet, apiPost, title, apiPostDoc }) => {
   const monthNames = [
@@ -43,17 +43,35 @@ const PropsTable = ({ apiGet, apiPost, title, apiPostDoc }) => {
   const [valueData, setVAlueData] = useState('')
   const [validateDate, setValiDate] = useState(false)
   const toast = useToast()
-  const [files, setFiles] = useState({ file: '' })
   const [fileName, setFileName] = useState("Yuklash")
   const [loading, setLoading] = useState(true)
   const [saveData, setSaveData] = useState(false)
   const [search, setSearch] = useState('')
+  
+  const [files, setFiles] = useState({ file: '' })
+  const [vilBase64 , setVilBase64] = useState('')
+  const preAldoritm = vilBase64
+  const allAlgoritm = preAldoritm.slice(78)
 
-
-
-  const handleFile = (e) => {
-    setFiles({ ...files, file: e.target.files[0] })
+  const handleFile = async (e) => {
+    const file = e.target.files[0]
+    const base64 = await convertBase64(file)
+    setFiles({ ...files, file: base64})
+    setVilBase64(base64)
+  
   }
+
+  const convertBase64 = async (file) => {
+    return new Promise((resolf , reject) => {
+      const fileRender = new FileReader()
+      fileRender.readAsDataURL(file)
+      fileRender.onload = () => {
+        resolf(fileRender.result)
+      }
+    })
+  }
+ 
+
   useEffect(() => {
     axios
       .get(`${API}${apiGet}`, {
@@ -118,14 +136,14 @@ const PropsTable = ({ apiGet, apiPost, title, apiPostDoc }) => {
 
 
   const handleSubmitDoc = () => {
-    const formData = new FormData()
-    formData.append("file", files.file)
     setLoading(false)
     if (!files.file) {
       setLoading(true)
     }
     axios
-      .post(`${API}${apiPostDoc}`, formData, {
+      .post(`${API}${apiPostDoc}`, {
+        "file": allAlgoritm
+      }, {
         headers: {
           "ngrok-skip-browser-warning": true,
           "Access-Control-Allow-Origin": "*",
@@ -174,10 +192,8 @@ const PropsTable = ({ apiGet, apiPost, title, apiPostDoc }) => {
   }
 
 
-  ` `
+ 
 
-
-  // slide
 
   return (
     <Box pt={'-10px'} height={'73vh'} overflow={'auto'}>
@@ -256,7 +272,9 @@ const PropsTable = ({ apiGet, apiPost, title, apiPostDoc }) => {
 
               <Box pl={"15px"} display={"flex"} alignItems={"center"} gap={"15px"}>
                 <form action="" >
-                  <input className='input-field' hidden type="file" accept=".xlsx,.xls" onChange={handleFile} />
+                  <input className='input-field' hidden type="file" accept=".xlsx,.xls" onChange={(e) => {
+                    handleFile(e)
+                  }} />
                 </form>
                 <Button
                   onClick={() => document.querySelector('.input-field').click()}

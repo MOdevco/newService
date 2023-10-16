@@ -25,7 +25,6 @@ import {
 } from '@chakra-ui/react'
 import { MdOutlineMoreVert } from 'react-icons/md'
 import axios from 'axios';
-import { API } from '../../api';
 import { useToast } from '@chakra-ui/react'
 import {
     Modal,
@@ -37,6 +36,7 @@ import {
     ModalCloseButton,
 } from '@chakra-ui/react'
 import { secure } from '../../assets';
+import { API } from '../api/api';
 const Hodimlar = () => {
     const monthNames = [
         "January",
@@ -83,10 +83,10 @@ const Hodimlar = () => {
     const { isOpen, onOpen, onClose } = useDisclosure()
     const [dataLogin, setDataLogin] = useState({ username: '', passport: '' })
 
-    const [validItem , setValidItem] = useState(false)
+    const [validItem, setValidItem] = useState(false)
 
     const handleValid = () => {
-        if(!dataFace.firstname.length || !dataFace.lastname.length || !dataFace.middlename.length || !dataFace.birthday.length || !dataFace.passport.length || !dataFace.tel1.length || !dataFace.tel2.length || !dataAuth.password.length || !dataAuth.username.length || !dataVal.endDate.length || !dataVal.startDate.length || !dataVal.stuffId.length) {
+        if (!dataFace.firstname.length || !dataFace.lastname.length || !dataFace.middlename.length || !dataFace.birthday.length || !dataFace.passport.length || !dataFace.tel1.length || !dataFace.tel2.length || !dataAuth.password.length || !dataAuth.username.length || !dataVal.endDate.length || !dataVal.startDate.length || !dataVal.stuffId.length) {
             setValidItem(true)
             onClose()
         } else {
@@ -194,9 +194,6 @@ const Hodimlar = () => {
     }, [])
 
 
-   
-
-
     return (
         <Box>
             <Box>
@@ -233,12 +230,12 @@ const Hodimlar = () => {
 
                                     <FormControl>
                                         <FormLabel>Sharfi</FormLabel>
-                                        <Input isInvalid={validItem ? true : false } required onChange={(e) => setDataFace({ ...dataFace, middlename: e.target.value })} value={dataFace.middlename} width={'300px'} type='text' placeholder='Sharfi..' />
+                                        <Input isInvalid={validItem ? true : false} required onChange={(e) => setDataFace({ ...dataFace, middlename: e.target.value })} value={dataFace.middlename} width={'300px'} type='text' placeholder='Sharfi..' />
                                     </FormControl>
 
                                     <FormControl isRequired>
                                         <FormLabel>Passport</FormLabel>
-                                        <Input  isInvalid={validItem ? true : false} required onChange={(e) => setDataFace({ ...dataFace, passport: e.target.value })} value={dataFace.passport} width={'300px'} placeholder='Passport..' />
+                                        <Input isInvalid={validItem ? true : false} required onChange={(e) => setDataFace({ ...dataFace, passport: e.target.value })} value={dataFace.passport} width={'300px'} placeholder='Passport..' />
                                     </FormControl>
 
                                 </Box>
@@ -246,11 +243,11 @@ const Hodimlar = () => {
                                 <Box display={'flex'} justifyContent={'space-between'} w={"100%"}>
                                     <FormControl isRequired>
                                         <FormLabel>Asosiy telefon</FormLabel>
-                                        <Input isInvalid={validItem ? true : false}  onChange={(e) => setDataFace({ ...dataFace, tel1: e.target.value })} value={dataFace.tel1} width={'300px'} placeholder='Asosiy telefon..' />
+                                        <Input isInvalid={validItem ? true : false} onChange={(e) => setDataFace({ ...dataFace, tel1: e.target.value })} value={dataFace.tel1} width={'300px'} placeholder='Asosiy telefon..' />
                                     </FormControl>
                                     <FormControl>
                                         <FormLabel>Qo’shimcha telefon</FormLabel>
-                                        <Input  isInvalid={validItem ? true : false} onChange={(e) => setDataFace({ ...dataFace, tel2: e.target.value })} value={dataFace.tel2} width={'300px'} placeholder='Qo’shimcha telefon..' />
+                                        <Input isInvalid={validItem ? true : false} onChange={(e) => setDataFace({ ...dataFace, tel2: e.target.value })} value={dataFace.tel2} width={'300px'} placeholder='Qo’shimcha telefon..' />
                                     </FormControl>
 
                                     <FormControl isRequired>
@@ -264,7 +261,7 @@ const Hodimlar = () => {
 
                                     <FormControl isRequired>
                                         <FormLabel>Ish boshlash sanasi</FormLabel>
-                                        <Input isInvalid={validItem ? true : false}  type='text' onChange={(e) => setDataVal({ ...dataVal, startDate: e.target.value })} value={dataVal.startDate} width={'300px'} placeholder='Ish boshlash sanasi..' />
+                                        <Input isInvalid={validItem ? true : false} type='text' onChange={(e) => setDataVal({ ...dataVal, startDate: e.target.value })} value={dataVal.startDate} width={'300px'} placeholder='Ish boshlash sanasi..' />
                                     </FormControl>
 
                                 </Box>
@@ -272,15 +269,15 @@ const Hodimlar = () => {
                                 <Box display={'flex'} justifyContent={'space-between'} w={"100%"}>
                                     <FormControl>
                                         <FormLabel>Ish yakunlash sanasi</FormLabel>
-                                        <Input isInvalid={validItem ? true : false}  type='text' onChange={(e) => setDataVal({ ...dataVal, endDate: e.target.value })} value={dataVal.endDate} width={'300px'} placeholder='Ish yakunlash sanasi..' />
+                                        <Input isInvalid={validItem ? true : false} type='text' onChange={(e) => setDataVal({ ...dataVal, endDate: e.target.value })} value={dataVal.endDate} width={'300px'} placeholder='Ish yakunlash sanasi..' />
                                     </FormControl>
                                     <FormControl>
                                         <FormLabel>Tug'ilgan sanasi</FormLabel>
-                                        <Input isInvalid={validItem ? true : false}   onChange={(e) => setDataFace({ ...dataFace, birthday: e.target.value })} value={dataFace.birthday} width={'300px'} placeholder='Tugilgan sanasi' />
+                                        <Input isInvalid={validItem ? true : false} onChange={(e) => setDataFace({ ...dataFace, birthday: e.target.value })} value={dataFace.birthday} width={'300px'} placeholder='Tugilgan sanasi' />
                                     </FormControl>
                                     <FormControl isRequired>
                                         <FormLabel>Username</FormLabel>
-                                        <Input isInvalid={validItem ? true : false}  onChange={(e) => setDataAuth({ ...dataAuth, username: e.target.value })} value={dataAuth.username} width={'300px'} placeholder='Username..' />
+                                        <Input isInvalid={validItem ? true : false} onChange={(e) => setDataAuth({ ...dataAuth, username: e.target.value })} value={dataAuth.username} width={'300px'} placeholder='Username..' />
                                     </FormControl>
 
                                     <FormControl isRequired>
@@ -304,7 +301,7 @@ const Hodimlar = () => {
 
                                                 <FormControl>
                                                     <FormLabel>Password</FormLabel>
-                                                    <Input isInvalid={validItem ? true : false}  onChange={(e) => setDataLogin({ ...dataLogin, passport: e.target.value })} placeContent={'password'} type='email' />
+                                                    <Input isInvalid={validItem ? true : false} onChange={(e) => setDataLogin({ ...dataLogin, passport: e.target.value })} placeContent={'password'} type='email' />
                                                 </FormControl>
 
                                             </ModalBody>
@@ -319,33 +316,33 @@ const Hodimlar = () => {
                                 </Box>
 
                             </Box>
-                            
+
                             <Box display={'flex'} justifyContent={'flex-end'} alignItems={'flex-end'} mt={'190px'}>
-                        <Button
+                                <Button
 
-                            onClick={function() {
-                                onOpen()
-                                handleValid()
-                            }}
+                                    onClick={function () {
+                                        onOpen()
+                                        handleValid()
+                                    }}
 
 
-                            mt={'30px'}
-                            bg={"#4CAF50"}
-                            color={"#fff"}
-                            size="md"
-                            borderRadius={"3px"}
-                            _hover={"none"}
-                            _active={"none"}
-                            px={'80px'}
-                        >
-                            Qo’shish
-                        </Button>
-                    </Box>
+                                    mt={'30px'}
+                                    bg={"#4CAF50"}
+                                    color={"#fff"}
+                                    size="md"
+                                    borderRadius={"3px"}
+                                    _hover={"none"}
+                                    _active={"none"}
+                                    px={'80px'}
+                                >
+                                    Qo’shish
+                                </Button>
+                            </Box>
 
                         </Box>
                     )}
 
-                   
+
 
                 </Box>
 

@@ -8,9 +8,10 @@ import {
   Toast,
 } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
-import { API } from "../api";
+
 import axios from "axios";
 import { Navigate, useNavigate } from "react-router-dom";
+import { API } from "../components/api/api";
 
 function Login() {
   const [data, setData] = useState({ username: "", password: "" });
@@ -21,7 +22,7 @@ function Login() {
       .post(`${API}api/auth/login`, {
         "username": data.username.trim(),
         "password": data.password.trim()
-        
+          
       })
       .then((res) => {
         if (res.status == 200) {

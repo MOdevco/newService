@@ -7,7 +7,7 @@ import PropsTable from "../propsTAble/propsTable";
 import axios from "axios";
 import { useToast } from '@chakra-ui/react'
 import Hodimlar from "../hodimlar/hodimlar";
-import { API } from "../../api";
+import { API } from "../api/api";
 
 const Asosiybody = () => {
   const toast = useToast()
@@ -54,7 +54,7 @@ const Asosiybody = () => {
   // }, []);
 
   return (
-    <Box p={'40px'} pt={'0px'} height={'100%'} width={'100%'}>
+    <Box p={'40px'} pt={'0px'} height={'100%'} width={'100%'}>  
       {/* birinvhi table */}
       <Tabs variant='red' >
         <TabList >
@@ -141,7 +141,7 @@ const Asosiybody = () => {
               {/* TOVAR SOTILADIGAN QURULMALAR */}
 
             </Box>
-          </TabPanel>
+          </TabPanel> 
           <TabPanel maxWidth={"1832px"} m={"auto"}>
             {/* TOVAR KATEGORIYALARI */}
             <PropsTable title={'Tovar kategoriyalar'} apiGet={'api/category'} apiPost={'api/category/new'} apiPostDoc={'api/category/upload'} />

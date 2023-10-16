@@ -21,8 +21,8 @@ import {
 } from '@chakra-ui/react'
 import { MdOutlineMoreVert } from 'react-icons/md'
 import axios from 'axios';
-import { API } from '../../api';
 import { useToast } from '@chakra-ui/react'
+import { API } from '../api/api';
 const TovarFirmalar = () => {
     const monthNames = [
         "January",
@@ -109,7 +109,6 @@ const TovarFirmalar = () => {
                 })
             });
     }
-
 
     return (
         <Box>

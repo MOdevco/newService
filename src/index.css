@@ -79,3 +79,10 @@ p {
     padding-left: 15px;
 }
 
+
+#salom{
+    background: green !important;
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
