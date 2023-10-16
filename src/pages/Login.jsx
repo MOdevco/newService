@@ -24,6 +24,7 @@ function Login() {
         "password": data.password.trim()
           
       })
+      
       .then((res) => {
         if (res.status == 200) {
             localStorage.setItem('token', res.data.token)

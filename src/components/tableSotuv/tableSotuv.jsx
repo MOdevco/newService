@@ -37,8 +37,8 @@ function TableSotuv() {
     axios
       .get(`${API}api/device-type`, {
         headers: {
-          // "ngrok-skip-browser-warning": true,
-          // "Access-Control-Allow-Origin": "*",
+          "ngrok-skip-browser-warning": true,
+          "Access-Control-Allow-Origin": "*",
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
       })
