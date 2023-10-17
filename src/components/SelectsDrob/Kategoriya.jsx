@@ -37,9 +37,6 @@ export default () => {
             });
     }, []);
 
-
-
-
     const customStyles = {
         option: (provided, state) => ({
           ...provided,

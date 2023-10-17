@@ -212,10 +212,6 @@ const Qabul = () => {
 
     // }, [])
 
-
-
-
-
     return (
         <Box>
             <Box>
@@ -236,7 +232,6 @@ const Qabul = () => {
                                     <FormLabel>Qurilma turi</FormLabel>
                                     <Box display={'flex'} alignItems={'center'} >
                                         <QurilmaTuriInp setData={setData} data={data} />
-
                                         <PopInput setData={setData} getApi={'api/device-type'} popInp={popInp} setpopInp={setpopInp} apiPost={'api/device-type/new'} />
                                     </Box>
                                 </FormControl>
@@ -245,7 +240,7 @@ const Qabul = () => {
                                     <FormLabel>Kategoriya</FormLabel>
                                     <Box display={'flex'} alignItems={'center'} >
                                         <Kategoriya />
-                                        <Image cursor={'pointer'} pl={'8px'} pt={'22px'} w={'20px'} src={plus}></Image>
+                                        <PopInput setData={setData} apiPost={'api/category/new'} popInp={popInp} setpopInp={setpopInp} />
                                     </Box>
                                 </FormControl>
 
@@ -253,7 +248,7 @@ const Qabul = () => {
                                     <FormLabel>Maxsulot turi</FormLabel>
                                     <Box display={'flex'} alignItems={'center'} >
                                         <MahsulotTuri />
-                                        <Image cursor={'pointer'} pl={'8px'} pt={'22px'} w={'20px'} src={plus}></Image>
+                                        <PopInput setData={setData} apiGet={'api/category-types'} apiPost={'api/category-types/new'} popInp={popInp} setpopInp={setpopInp} />
                                     </Box>
                                 </FormControl>
 
@@ -261,14 +256,14 @@ const Qabul = () => {
                                     <FormLabel>Firma nomi</FormLabel>
                                     <Box display={'flex'} alignItems={'center'} >
                                         <FirmaNomi />
-                                        <Image cursor={'pointer'} pl={'8px'} pt={'22px'} w={'20px'} src={plus}></Image>
+                                        <PopInput  setData={setData}  popInp={popInp} setpopInp={setpopInp} apiGet={'api/firm'} apiPost={'api/firm/new'} />
                                     </Box>
                                 </FormControl>
                                 <FormControl>
                                     <FormLabel>Firma davlati</FormLabel>
                                     <Box display={'flex'} alignItems={'center'} >
                                         <FirmaDavlati />
-                                        <Image cursor={'pointer'} pl={'8px'} pt={'22px'} w={'20px'} src={plus}></Image>
+                                        <PopInput />
                                     </Box>
                                 </FormControl>
 
@@ -280,7 +275,7 @@ const Qabul = () => {
                                     <FormLabel>Miqdor turi</FormLabel>
                                     <Box display={'flex'} alignItems={'center'} >
                                         <MiqdorTuri />
-                                        <Image cursor={'pointer'} pl={'8px'} pt={'22px'} w={'20px'} src={plus}></Image>
+                                        <PopInput />
                                     </Box>
                                 </FormControl>
 
@@ -288,7 +283,7 @@ const Qabul = () => {
                                     <FormLabel>Valyuta turi</FormLabel>
                                     <Box display={'flex'} alignItems={'center'} >
                                         <ValyutaTuri />
-                                        <Image cursor={'pointer'} pl={'8px'} pt={'22px'} w={'20px'} src={plus}></Image>
+                                        <PopInput />
                                     </Box>
                                 </FormControl>
 

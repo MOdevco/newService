@@ -23,8 +23,6 @@ export default ({setData , data}) => {
         options.push(obj);
     }
 
-
-
     useEffect(() => {
         axios
             .get(`${API}api/device-type`, {

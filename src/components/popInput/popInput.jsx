@@ -4,7 +4,7 @@ import { plus } from '../../assets'
 import axios from 'axios'
 import { API } from '../api/api'
 import { useToast } from '@chakra-ui/react'
-function PopInput({apiPost,setpopInp,popInp,getApi , setData}) {
+function  PopInput({apiPost,setpopInp,popInp,getApi,setData}) {
     const toast = useToast()
     const [visible , setVisible] = useState(true)
     const handelSubmit = () =>{

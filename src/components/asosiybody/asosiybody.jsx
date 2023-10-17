@@ -8,6 +8,8 @@ import axios from "axios";
 import { useToast } from '@chakra-ui/react'
 import Hodimlar from "../hodimlar/hodimlar";
 import { API } from "../api/api";
+import Status from "../status/status";
+import Valyuta from "../valyuta turi/Valyuta";
 
 const Asosiybody = () => {
   const toast = useToast()
@@ -131,6 +133,25 @@ const Asosiybody = () => {
           >
           Hodimlar
           </Tab>
+          <Tab
+            fontSize={"20px"}
+            fontWeight={"500"}
+            lineHeight={"20px"}
+            wordBreak={"break-word"}
+            _selected={{ color: '#FF5C00' }}
+          >
+         Satatus
+          </Tab>
+
+          <Tab
+            fontSize={"20px"}
+            fontWeight={"500"}
+            lineHeight={"20px"}
+            wordBreak={"break-word"}
+            _selected={{ color: '#FF5C00' }}
+          >
+         Valyuta turi
+          </Tab>
         </TabList>
 
         <TabPanels >
@@ -176,7 +197,15 @@ const Asosiybody = () => {
 
 
           <TabPanel maxWidth={"1832px"} m={"auto"}>
-            <Hodimlar />
+            <Hodimlar  />
+          </TabPanel>
+
+          <TabPanel maxWidth={"1832px"} m={"auto"}>
+            <Status />
+          </TabPanel>
+          
+          <TabPanel maxWidth={"1832px"} m={"auto"}>
+            <Valyuta />
           </TabPanel>
           
 
