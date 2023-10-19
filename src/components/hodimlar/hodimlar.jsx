@@ -136,7 +136,7 @@ const Hodimlar = () => {
                 },
             })
             .then((res) => {
-                // setDataVal({password: "",username: "", endDate: "",birthday: "", firstname: "", lastname: "", middlename: "", passport:"", tel1:"", tel2:"", startDate:"", stuffId:"" })
+                setDataVal({password: "",username: "", endDate: "",birthday: "", firstname: "", lastname: "", middlename: "", passport:"", tel1:"", tel2:"", startDate:"", stuffId:"" })
                 toast({
                     description: `Malumot saqlandi`,
                     status: 'success',
