@@ -1,5 +1,5 @@
-import { Box, Button, FormControl, FormLabel, Input, Text } from '@chakra-ui/react'
-import React, { useState } from 'react'
+import { Box, Button, FormControl, FormLabel, Input, Text, useToast } from '@chakra-ui/react'
+import React, { useEffect, useState } from 'react'
 import {
     Table,
     Thead,
@@ -13,10 +13,71 @@ import {
 } from '@chakra-ui/react'
 import { MdOutlineMoreVert } from 'react-icons/md'
 import { AiFillMinusCircle, AiFillPlusCircle } from 'react-icons/ai'
+import axios from 'axios'
+import { API } from '../api/api'
 function Status() {
     const handleClick = () => setopen(!open);
+    const toast = useToast()
     const [open, setopen] = useState(false);
-    const [dataVal, setDataVal] = useState({ address: '', email: '', name: '', tel: '', web: "" })
+    const [status, setStatus] = useState({ name: "" })
+    const [data, setData] = useState([])
+    useEffect(() => {
+        axios
+            .get(`${API}api/status`, {
+                headers: {
+                    // "ngrok-skip-browser-warning": true,
+                    // "Access-Control-Allow-Origin": "*",
+                    Authorization: `Bearer ${localStorage.getItem("token")}`,
+                },
+            })
+            .then((res) => {
+                setData(res.data);
+            });
+    }, []);
+
+    const handleStatus = () => {
+        axios
+            .post(`${API}api/status/new`, {
+                name: status.name,
+            }, {
+                headers: {
+                    // "ngrok-skip-browser-warning": true,
+                    // "Access-Control-Allow-Origin": "*",
+                    Authorization: `Bearer ${localStorage.getItem("token")}`,
+                },
+
+            })
+            .then((res) => {
+                toast({
+                    description: `Malumot saqlandi`,
+                    status: 'success',
+                    position: 'top-right',
+                    duration: 2000,
+                    isClosable: true,
+                })
+                axios
+                    .get(`${API}api/status`, {
+                        headers: {
+                            // "ngrok-skip-browser-warning": true,
+                            // "Access-Control-Allow-Origin": "*",
+                            Authorization: `Bearer ${localStorage.getItem("token")}`,
+                        },
+                    })
+                    .then((res) => {
+                        setData(res.data);
+                    });
+            })
+            .catch((err) => {
+                toast({
+                    description: `${err.response.data.message}`,
+                    status: 'error',
+                    position: 'top-right',
+                    duration: 2000,
+                    isClosable: true,
+                })
+            });
+    }
+
     return (
         <Box>
 
@@ -38,21 +99,15 @@ function Status() {
                     </Button>
                 </Box>
                 {open && (
-                    <Box width={'50%'} display={"flex"} alignItems={"center"}>
+                    <Box width={'25%'} display={"flex"} alignItems={"center"}>
                         <Box display={'flex'} justifyContent={'space-between'} alignItems={'center'} width={'100%'} gap={'20px'}>
                             <FormControl isRequired>
                                 <FormLabel>Nomi</FormLabel>
-                                <Input onChange={(e) => setDataVal({ ...dataVal, name: e.target.value })} value={dataVal.name} placeholder='Nomi..' />
+                                <Input onChange={(e) => setStatus({ ...status, name: e.target.value })} value={status.name} placeholder='Nomi..' />
                             </FormControl>
-
-                            <FormControl isRequired>
-                                <FormLabel>Address</FormLabel>
-                                <Input onChange={(e) => setDataVal({ ...dataVal, address: e.target.value })} value={dataVal.address} placeholder='Address..' />
-                            </FormControl>
-
 
                             <Button
-
+                                onClick={handleStatus}
                                 mt={'30px'}
                                 bg={"#4CAF50"}
                                 color={"#fff"}
@@ -60,7 +115,7 @@ function Status() {
                                 borderRadius={"3px"}
                                 _hover={"none"}
                                 _active={"none"}
-                                width={'400px'}
+                                width={'200px'}
                             >
                                 Qo’shish
                             </Button>
@@ -76,99 +131,23 @@ function Status() {
                 <Table width={"100%"} rounded={"16px"} fontSize={'15pxpx'}>
                     <Thead>
                         <Tr bg="#F1F3F9" >
-                            <Th fontWeight={'bold'} color={'#1D2433'} textTransform={'capitalize'} fontSize={'15px'}>№</Th>
-                            <Th fontWeight={'bold'} color={'#1D2433'} textTransform={'capitalize'} fontSize={'15px'}>Kategoriya</Th>
-                            <Th fontWeight={'bold'} color={'#1D2433'} textTransform={'capitalize'} fontSize={'15px'}>Maxsulot turi</Th>
-                            <Th fontWeight={'bold'} color={'#1D2433'} textTransform={'capitalize'} fontSize={'15px'}>Qurilma turi</Th>
-                            <Th fontWeight={'bold'} color={'#1D2433'} textTransform={'capitalize'} fontSize={'15px'}>Firma</Th>
-                            <Th fontWeight={'bold'} color={'#1D2433'} textTransform={'capitalize'} fontSize={'15px'}>Davlati</Th>
-                            <Th fontWeight={'bold'} color={'#1D2433'} textTransform={'capitalize'} fontSize={'15px'}>Miqdor turi</Th>
-                            <Th fontWeight={'bold'} color={'#1D2433'} textTransform={'capitalize'} fontSize={'15px'}>valyuta turi</Th>
-                            <Th fontWeight={'bold'} color={'#1D2433'} textTransform={'capitalize'} fontSize={'15px'}>Kelish narxi</Th>
-                            <Th fontWeight={'bold'} color={'#1D2433'} textTransform={'capitalize'} fontSize={'15px'}>Miqdori</Th>
-                            <Th fontWeight={'bold'} color={'#1D2433'} textTransform={'capitalize'} fontSize={'15px'}>Qabul sanasi</Th>
-                            <Th fontWeight={'bold'} color={'#1D2433'} textTransform={'capitalize'} fontSize={'15px'}>User</Th>
+                            <Th w={'25px'} fontWeight={'bold'} color={'#1D2433'} textTransform={'capitalize'} fontSize={'15px'}>№</Th>
+                            <Th fontWeight={'bold'} color={'#1D2433'} textTransform={'capitalize'} fontSize={'15px'}>Status</Th>
                             <Th></Th>
                         </Tr>
                     </Thead>
                     <Tbody>
 
-                        <Tr>
-                            <Td>1</Td>
-                            <Td>Text</Td>
-                            <Td>Text</Td>
-                            <Td>Text</Td>
-                            <Td>Text</Td>
-                            <Td>Text</Td>
-                            <Td>Text</Td>
-                            <Td>Text</Td>
-                            <Td>Text</Td>
-                            <Td>Text</Td>
-                            <Td>Text</Td>
-
-                            <Td><MdOutlineMoreVert size={"29px"} /></Td>
-                        </Tr>
-                        <Tr>
-                            <Td>2</Td>
-                            <Td>Text</Td>
-                            <Td>Text</Td>
-                            <Td>Text</Td>
-                            <Td>Text</Td>
-                            <Td>Text</Td>
-                            <Td>Text</Td>
-                            <Td>Text</Td>
-                            <Td>Text</Td>
-                            <Td>Text</Td>
-                            <Td>Text</Td>
-
-                            <Td><MdOutlineMoreVert size={"29px"} /></Td>
-                        </Tr>
-                        <Tr>
-                            <Td>3</Td>
-                            <Td>Text</Td>
-                            <Td>Text</Td>
-                            <Td>Text</Td>
-                            <Td>Text</Td>
-                            <Td>Text</Td>
-                            <Td>Text</Td>
-                            <Td>Text</Td>
-                            <Td>Text</Td>
-                            <Td>Text</Td>
-                            <Td>Text</Td>
-
-                            <Td><MdOutlineMoreVert size={"29px"} /></Td>
-                        </Tr>
-                        <Tr>
-                            <Td>4</Td>
-                            <Td>Text</Td>
-                            <Td>Text</Td>
-                            <Td>Text</Td>
-                            <Td>Text</Td>
-                            <Td>Text</Td>
-                            <Td>Text</Td>
-                            <Td>Text</Td>
-                            <Td>Text</Td>
-                            <Td>Text</Td>
-                            <Td>Text</Td>
-
-                            <Td><MdOutlineMoreVert size={"29px"} /></Td>
-                        </Tr>
-                        <Tr>
-                            <Td>5</Td>
-                            <Td>Text</Td>
-                            <Td>Text</Td>
-                            <Td>Text</Td>
-                            <Td>Text</Td>
-                            <Td>Text</Td>
-                            <Td>Text</Td>
-                            <Td>Text</Td>
-                            <Td>Text</Td>
-                            <Td>Text</Td>
-                            <Td>Text</Td>
-
-                            <Td><MdOutlineMoreVert size={"29px"} /></Td>
-                        </Tr>
-
+                        {data.map((item, i) => (
+                            <Tr key={i} bg={i % 2 == 1 ? "#F8F9FC" : ""}>
+                                <Td>
+                                    {i + 1}
+                                </Td>
+                                <Td>
+                                    {item.name}
+                                </Td>
+                            </Tr>
+                        ))}
                     </Tbody>
                 </Table>
             </TableContainer>

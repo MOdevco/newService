@@ -25,7 +25,7 @@ export default () => {
 
     useEffect(() => {
         axios
-            .get(`${API}api/category-types`, {
+            .get(`${API}api/currency`, {
                 headers: {
                     // "ngrok-skip-browser-warning": true,
                     // "Access-Control-Allow-Origin": "*",
@@ -38,17 +38,11 @@ export default () => {
     }, []);
 
 
-    const customStyles = {
-        option: (provided, state) => ({
-          ...provided,
-          backgroundColor: state.isSelected ? '#10B981' : '#10B981',
-          color: state.isSelected ? 'white' : 'white',
-        }),
-      };
+   
       
     return (
         <Box width={'300px'}>
-            <Select styles={customStyles} options={options.map((option, index) => ({
+            <Select  options={options.map((option, index) => ({
                 value: index,
                 label: option.value
             }))}>
