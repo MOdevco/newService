@@ -32,21 +32,17 @@ function NavbarLinks() {
           </Text>
         </Box>
       </Link>
-      <Link>
-        <Box
-          display={"flex"}
-          cursor={"pointer"}
-          alignItems={"center"}
-          gap={"14px"}
-          pt={'10px'}
-          pb={'5px'}
-        >
-          <Image src={recive} alt='Dan Abramov' />
-          <Text color={"#fff"} fontSize={"20px"} fontWeight={"500"}>
-            Maxsulot qabuli
-          </Text>
-        </Box>
-      </Link>
+      <Text display={"flex"}
+        cursor={"pointer"}
+        alignItems={"center"}
+        gap={"14px"}
+        pt={'10px'}
+        pb={'5px'} color={"#fff"} fontSize={"20px"} fontWeight={"500"}>
+        <Image src={recive} alt='Dan Abramov' />
+        <NavLink to={'/mahsulotQabuli'}>
+        Maxsulot qabuli
+        </NavLink>
+      </Text>
       <Link>
         <Box
           display={"flex"}

@@ -7,7 +7,9 @@ import PropsTable from "../propsTAble/propsTable";
 import axios from "axios";
 import { useToast } from '@chakra-ui/react'
 import Hodimlar from "../hodimlar/hodimlar";
-import { API } from "../../api";
+import { API } from "../api/api";
+import Status from "../status/status";
+import Valyuta from "../valyuta turi/Valyuta";
 
 const Asosiybody = () => {
   const toast = useToast()
@@ -54,7 +56,7 @@ const Asosiybody = () => {
   // }, []);
 
   return (
-    <Box p={'40px'} pt={'0px'} height={'100%'} width={'100%'}>
+    <Box p={'40px'} pt={'0px'} height={'100%'} width={'100%'}>  
       {/* birinvhi table */}
       <Tabs variant='red' >
         <TabList >
@@ -131,6 +133,25 @@ const Asosiybody = () => {
           >
           Hodimlar
           </Tab>
+          <Tab
+            fontSize={"20px"}
+            fontWeight={"500"}
+            lineHeight={"20px"}
+            wordBreak={"break-word"}
+            _selected={{ color: '#FF5C00' }}
+          >
+         Satatus
+          </Tab>
+
+          <Tab
+            fontSize={"20px"}
+            fontWeight={"500"}
+            lineHeight={"20px"}
+            wordBreak={"break-word"}
+            _selected={{ color: '#FF5C00' }}
+          >
+         Valyuta turi
+          </Tab>
         </TabList>
 
         <TabPanels >
@@ -141,7 +162,7 @@ const Asosiybody = () => {
               {/* TOVAR SOTILADIGAN QURULMALAR */}
 
             </Box>
-          </TabPanel>
+          </TabPanel> 
           <TabPanel maxWidth={"1832px"} m={"auto"}>
             {/* TOVAR KATEGORIYALARI */}
             <PropsTable title={'Tovar kategoriyalar'} apiGet={'api/category'} apiPost={'api/category/new'} apiPostDoc={'api/category/upload'} />
@@ -176,7 +197,15 @@ const Asosiybody = () => {
 
 
           <TabPanel maxWidth={"1832px"} m={"auto"}>
-            <Hodimlar />
+            <Hodimlar  />
+          </TabPanel>
+
+          <TabPanel maxWidth={"1832px"} m={"auto"}>
+            <Status />
+          </TabPanel>
+          
+          <TabPanel maxWidth={"1832px"} m={"auto"}>
+            <Valyuta />
           </TabPanel>
           
 

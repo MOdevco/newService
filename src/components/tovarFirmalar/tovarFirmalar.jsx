@@ -21,8 +21,8 @@ import {
 } from '@chakra-ui/react'
 import { MdOutlineMoreVert } from 'react-icons/md'
 import axios from 'axios';
-import { API } from '../../api';
 import { useToast } from '@chakra-ui/react'
+import { API } from '../api/api';
 const TovarFirmalar = () => {
     const monthNames = [
         "January",
@@ -110,7 +110,6 @@ const TovarFirmalar = () => {
             });
     }
 
-
     return (
         <Box>
             <Box>
@@ -132,7 +131,7 @@ const TovarFirmalar = () => {
                         </Button>
                     </Box>
                     {open && (
-                        <Box width={'100%'} display={"flex"} alignItems={"center"}>
+                        <Box width={'50%'} display={"flex"} alignItems={"center"}>
                             <Box display={'flex'} justifyContent={'space-between'} alignItems={'center'} width={'100%'} gap={'20px'}>
                                 <FormControl isRequired>
                                     <FormLabel>Nomi</FormLabel>
@@ -144,20 +143,7 @@ const TovarFirmalar = () => {
                                     <Input onChange={(e) => setDataVal({ ...dataVal, address: e.target.value })} value={dataVal.address}  placeholder='Address..' />
                                 </FormControl>
 
-                                <FormControl isRequired>
-                                    <FormLabel>Telefon</FormLabel>
-                                    <Input onChange={(e) => setDataVal({ ...dataVal, tel: e.target.value })} value={dataVal.tel} type='number' placeholder='Telefon..' />
-                                </FormControl>
-
-                                <FormControl isRequired>
-                                    <FormLabel>Email</FormLabel>
-                                    <Input onChange={(e) => setDataVal({ ...dataVal, email: e.target.value })} value={dataVal.email} placeholder='Email..' />
-                                </FormControl>
-
-                                <FormControl isRequired>
-                                    <FormLabel>Web</FormLabel>
-                                    <Input onChange={(e) => setDataVal({ ...dataVal, web: e.target.value })} value={dataVal.web} placeholder='Web..' />
-                                </FormControl>
+                               
                                 <Button
                                     onClick={handleSubmit}
                                     mt={'30px'}
@@ -181,18 +167,13 @@ const TovarFirmalar = () => {
                 </Box>
             </Box>
 
-            <TableContainer shadow={"0px 2px 8px 0px rgba(0, 0, 0, 0.12)"} mt={'20px'}>
-                <Table width={"100%"} rounded={"16px"} fontSize={'19px'}>
-                    <Thead>
-                        <Tr bg="#F1F3F9" >
+            <TableContainer w={'75%'} shadow={"0px 2px 8px 0px rgba(0, 0, 0, 0.12)"} mt={'20px'}>
+                <Table  rounded={"16px"} fontSize={'19px'}>
+                    <Thead w={'100%'}>
+                        <Tr bg="#F1F3F9" w={'100%'}>
                             <Th fontWeight={'bold'} color={'#1D2433'} textTransform={'capitalize'} fontSize={'17px'}>№</Th>
                             <Th fontWeight={'bold'} color={'#1D2433'} textTransform={'capitalize'} fontSize={'17px'}> Nomi</Th>
                             <Th fontWeight={'bold'} color={'#1D2433'} textTransform={'capitalize'} fontSize={'17px'}>Address</Th>
-                            <Th fontWeight={'bold'} color={'#1D2433'} textTransform={'capitalize'} fontSize={'17px'}>Telefon</Th>
-                            <Th fontWeight={'bold'} color={'#1D2433'} textTransform={'capitalize'} fontSize={'17px'}>Email</Th>
-                            <Th fontWeight={'bold'} color={'#1D2433'} textTransform={'capitalize'} fontSize={'17px'}>Web</Th>
-                            <Th fontWeight={'bold'} color={'#1D2433'} textTransform={'capitalize'} fontSize={'17px'}>Date</Th>
-                            <Th fontWeight={'bold'} color={'#1D2433'} textTransform={'capitalize'} fontSize={'17px'}>User</Th>
                             <Th></Th>
                         </Tr>
                     </Thead>
@@ -200,20 +181,10 @@ const TovarFirmalar = () => {
                         {data.map((item, i) => (
                             <Tr key={i} bg={i % 2 == 1 ? '#F8F9FC' : ''}>
                                 <Td>{i + 1}</Td>
-                                <Td width={'15%'}>{item.name}</Td>
+                                <Td>{item.name}</Td>
                                 <Td>{item.address}</Td>
-                                <Td>{item.tel}</Td>
-                                <Td>{item.email}</Td>
-                                <Td>{item.web}</Td>
-                                <Td> {String(item.date).slice(0, 4) +
-                                    " " +
-                                    `${name}` +
-                                    " " +
-                                    String(item.date).slice(8, 10) +
-                                    " " +
-                                    String(item.date).slice(11, 16)}</Td>
-                                <Td>Muhammadali Anvarov</Td>
                                 <Td><MdOutlineMoreVert size={"29px"} /></Td>
+                                
                             </Tr>
                         ))}
 

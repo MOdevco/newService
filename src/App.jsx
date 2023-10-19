@@ -13,6 +13,7 @@ import AsosiyMalumatlar from "./pages/AsosiyMalumotlar";
 import Asosiybody from "./components/asosiybody/asosiybody";
 import Navbar from "./components/navbar/navbar";
 import Login from "./pages/Login";
+import MahsulotQabuli from "./pages/MahsulotQabuli";
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
         <Routes>
           <Route path="/" element={<AsosiyMalumatlar />}></Route>
           <Route path="/asosiy" element={<Asosiybody />}></Route>
+          <Route path="/mahsulotQabuli" element={<MahsulotQabuli />}></Route>
           <Route path="/login" element={<Login />}></Route>
         </Routes>
       </Box>

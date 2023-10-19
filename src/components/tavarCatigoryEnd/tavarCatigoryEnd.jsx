@@ -14,17 +14,9 @@ import {
 } from "@chakra-ui/react";
 import { Tabs, TabList, TabPanels, Tab, TabPanel } from "@chakra-ui/react";
 import axios from "axios";
+import { Checkbox } from "react-inputs-validation";
+import { API } from "../api/api";
 
-
-import { AiFillMinusCircle, AiFillPlusCircle } from 'react-icons/ai';
-import { API } from '../../api';
-function TavarCatigoryEnd({ handleValCheck, setCheckVal, setTabsId }) {
-  const [data, setData] = useState([])
-  const [checkedVal, setValue] = useState([])
-  const [v, setV] = useState('')
-  const [q, setQ] = useState([])
-  let X = []
-  let Y = []
 
 function TavarCatigoryEnd({ handleValCheck, setCheckVal, setTabsId }) {
   const [data, setData] = useState([]);
@@ -32,7 +24,6 @@ function TavarCatigoryEnd({ handleValCheck, setCheckVal, setTabsId }) {
   const [v, setV] = useState("");
   const [q, setQ] = useState([]);
 
-  console.log(v);
   let X = [];
   let Y = [];
 
@@ -240,7 +231,7 @@ function TavarCatigoryEnd({ handleValCheck, setCheckVal, setTabsId }) {
         }
       })}
     </Box>
-  );
-}}
+  )}
 
-export default TavarCatigoryEnd;
+
+export default TavarCatigoryEnd
