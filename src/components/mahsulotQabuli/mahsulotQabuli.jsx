@@ -26,6 +26,11 @@ import PopInput from '../popInput/popInput';
 import { API } from '../api/api';
 
 const Qabul = () => {
+    // value of bar code
+    const [valueBar , setValueBa] = useState('')
+    console.log(valueBar);
+
+
 
     const strixCode = useRef(null)
 
@@ -60,6 +65,16 @@ const Qabul = () => {
         const [valyutaInp, setValyutaInp] = useState('')
         const [valyuta,setValyuta] = useState([])
     // Valyuta
+
+        const formData = new FormData()
+        formData.append("product_code" , valueBar)
+        axios.post(`${API}api/product/check` , formData , {
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem('token')}`
+            }
+        } ).then((res) => {
+            console.log(res.data);
+        })
 
     useEffect(() => {
         strixCode.current.focus()
@@ -119,7 +134,7 @@ const Qabul = () => {
                     <Box pt={'40px'}>
                         <FormControl>
                             <FormLabel>Strix code</FormLabel>
-                            <Input ref={strixCode} _hover={'none'} borderColor={'#D0D5DD'} isInvalid={validItem ? true : false} width={'300px'} />
+                            <Input ref={strixCode} _hover={'none'} borderColor={'#D0D5DD'} onChange={e => setValueBa(e.target.value)} isInvalid={validItem ? true : false} width={'300px'} />
                         </FormControl>
                     </Box>
                     {/* Strix code */}
@@ -228,6 +243,7 @@ const Qabul = () => {
 
                             <Box >
                                 <Button
+                                
                                     mt={'15px'}
                                     bg={"#10B981"}
                                     color={"#fff"}
