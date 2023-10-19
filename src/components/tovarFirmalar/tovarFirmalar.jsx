@@ -44,7 +44,7 @@ const TovarFirmalar = () => {
     const [open, setopen] = useState(false);
     const handleClick = () => setopen(!open);
     const [data, setData] = useState([])
-    const [dataVal, setDataVal] = useState({ address: '', email: '', name: '', tel: '', web: "" })
+    const [dataVal, setDataVal] = useState({ address: '', name: ''})
     const toast = useToast()
    
     useEffect(() => {

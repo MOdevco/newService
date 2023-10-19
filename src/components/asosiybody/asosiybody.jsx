@@ -15,7 +15,6 @@ const Asosiybody = () => {
   const toast = useToast()
   const [tabsId,setTabsId] = useState([])
   const [checkVal, setCheckVal] = useState([])
-  // console.log(tabsId);
   const handleValCheck = () => {
     axios.post(`${API}api/category/attach`, {
       "categoryId": tabsId,
@@ -38,6 +37,7 @@ const Asosiybody = () => {
     })
   }
 
+  
 
   // const [data, setData] = useState([])
   // useEffect(() => {
@@ -60,15 +60,6 @@ const Asosiybody = () => {
       {/* birinvhi table */}
       <Tabs variant='red' >
         <TabList >
-          <Tab
-            fontSize={"20px"}
-            fontWeight={"500"}
-            lineHeight={"20px"}
-            wordBreak={"break-word"}
-            _selected={{ color: '#FF5C00' }}
-          >
-            Tovar sotiladigan qurilmalar
-          </Tab>
           <Tab
             fontSize={"20px"}
             fontWeight={"500"}
@@ -156,14 +147,6 @@ const Asosiybody = () => {
 
         <TabPanels >
           <TabPanel maxWidth={"1832px"} m={"auto"}>
-            <Box >
-              {/* TOVAR SOTILADIGAN QURULMALAR */}
-              <PropsTable title={'Tovar sotiladigan qurilmalar'} apiGet={'api/device-type'} apiPost={'api/device-type/new'} apiPostDoc={'api/device-type/upload'} />
-              {/* TOVAR SOTILADIGAN QURULMALAR */}
-
-            </Box>
-          </TabPanel> 
-          <TabPanel maxWidth={"1832px"} m={"auto"}>
             {/* TOVAR KATEGORIYALARI */}
             <PropsTable title={'Tovar kategoriyalar'} apiGet={'api/category'} apiPost={'api/category/new'} apiPostDoc={'api/category/upload'} />
             {/* TOVAR KATEGORIYALARI */}
@@ -178,6 +161,7 @@ const Asosiybody = () => {
           <TabPanel maxWidth={"1832px"} m={"auto"}>
             <TavarCatigoryEnd  setTabsId={setTabsId} handleValCheck={handleValCheck} />
           </TabPanel>
+          
           <TabPanel maxWidth={"1832px"} m={"auto"}>
             {/* SOTUV TURLARI */}
             <PropsTable title={'Sotuv miqdor turlari'} apiGet={'api/unit'} apiPost={'api/unit/new'} apiPostDoc={'api/unit/upload'} />
@@ -208,10 +192,8 @@ const Asosiybody = () => {
             <Valyuta />
           </TabPanel>
           
-
         </TabPanels>
       </Tabs>
-
     </Box>
   );
 }
