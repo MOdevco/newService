@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Box, Button, FormControl, FormLabel, Input, Text } from '@chakra-ui/react'
+import { Box, Button, FormControl, FormLabel, Input, Text, useToast } from '@chakra-ui/react'
 import {
     Table,
     Thead,
@@ -17,8 +17,11 @@ import axios from 'axios'
 import { API } from '../api/api'
 function Valyuta() {
 
-    const [data,setData] = useState([])
-    const [dataVal, setDataVal] = useState({ nomi: ''})
+    const [data, setData] = useState([])
+    const handleClick = () => setopen(!open);
+    const [open, setopen] = useState(false);
+    const [dataVal, setDataVal] = useState({ name: '' })
+    const toast = useToast()
     useEffect(() => {
         axios
             .get(`${API}api/currency`, {
@@ -36,7 +39,7 @@ function Valyuta() {
     const handleSubmit = () => {
         axios
             .post(`${API}api/currency/new`, {
-                "name": dataVal.name,
+                name: dataVal.name,
             }, {
                 headers: {
                     // "ngrok-skip-browser-warning": true,
@@ -46,8 +49,6 @@ function Valyuta() {
 
             })
             .then((res) => {
-                setDataVal({ nomi: ''})
-                console.log(res.data);
                 toast({
                     description: `Malumot saqlandi`,
                     status: 'success',
@@ -78,10 +79,6 @@ function Valyuta() {
             });
     }
 
-
-    const handleClick = () => setopen(!open);
-    const [open, setopen] = useState(false);
-    
     return (
 
         <Box>
@@ -111,7 +108,7 @@ function Valyuta() {
                             </FormControl>
 
                             <Button
-
+                                onClick={handleSubmit}
                                 mt={'30px'}
                                 bg={"#4CAF50"}
                                 color={"#fff"}
@@ -137,22 +134,22 @@ function Valyuta() {
                         <Tr bg="#F1F3F9" >
                             <Th w={'20px'} fontWeight={'bold'} color={'#1D2433'} textTransform={'capitalize'} fontSize={'15px'}>№</Th>
                             <Th fontWeight={'bold'} color={'#1D2433'} textTransform={'capitalize'} fontSize={'15px'}>Kategoriya</Th>
-                           
+
                             <Th></Th>
                         </Tr>
                     </Thead>
                     <Tbody>
 
-                       {data.map((item,i) =>(
-                        <Tr key={i} bg={i % 2 == 1 ? "#F8F9FC" : ""}>
-                            <Td>
-                                {i + 1}
-                            </Td>
-                            <Td>
-                                {item.name}
-                            </Td>
-                        </Tr>
-                       ))}
+                        {data.map((item, i) => (
+                            <Tr key={i} bg={i % 2 == 1 ? "#F8F9FC" : ""}>
+                                <Td>
+                                    {i + 1}
+                                </Td>
+                                <Td>
+                                    {item.name}
+                                </Td>
+                            </Tr>
+                        ))}
 
                     </Tbody>
                 </Table>

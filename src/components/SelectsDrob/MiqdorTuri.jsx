@@ -4,8 +4,7 @@ import Select from 'react-select'
 import { API } from '../api/api';
 import axios from 'axios';
 
-export default () => {
-    const [data, setData] = useState([])
+export default ({data}) => {
     let all = []
     data.map((item) => (
         all.push(item.name)
@@ -39,17 +38,11 @@ export default () => {
     }, []);
 
 
-    const customStyles = {
-        option: (provided, state) => ({
-          ...provided,
-          backgroundColor: state.isSelected ? '#10B981' : '#10B981',
-          color: state.isSelected ? 'white' : 'white',
-        }),
-      };
+   
       
     return (
         <Box width={'300px'}>
-            <Select styles={customStyles} options={options.map((option, index) => ({
+            <Select options={options.map((option, index) => ({
                 value: index,
                 label: option.value
             }))}>
